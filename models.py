@@ -21,29 +21,29 @@ class OrchestratorOutput(BaseModel):
         description="A suggested opening line for the Client to kick off the conversation naturally."
     )
 
-
-from pydantic import BaseModel, Field
-
-
 class AnalysisOutput(BaseModel):
-    """Schema for the Analyzer agent's output. Enforces strict JSON formatting."""
 
     reasoning: str = Field(
-        description="Step-by-step reasoning. Analyze if the problem was actually resolved, check for hidden dissatisfaction, and explain the logic behind the quality score."
+        ...,
+        description="Note your step-by-step logic in a concise, telegraphic style using bullet points. Focus only on facts."
     )
 
     intent: str = Field(
+        ...,
         description="The main intent of the user. Choose from: payment_issues, technical_errors, account_access, tariff_questions, refunds, other."
     )
 
     satisfaction: str = Field(
+        ...,
         description="Client's final satisfaction state. Choose strictly from: satisfied, neutral, unsatisfied."
     )
 
     quality_score: int = Field(
+        ...,
         description="Quality score from 1 to 5 based on the agent's performance."
     )
 
     agent_mistakes: list[str] = Field(
+        ...,
         description="List of specific mistakes made by the agent. Choose from: ignored_question, incorrect_info, rude_tone, no_resolution, unnecessary_escalation. Empty list if no mistakes."
     )

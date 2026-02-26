@@ -32,15 +32,40 @@ class CaseScenario(str, enum.Enum):
     CONFLICT = "conflict"                     # конфліктні кейси
     AGENT_MISTAKE = "agent_mistake"           # випадки з помилками агента
 
+CLIENT_AGES = ["18-24", "25-34", "35-44", "45-60", "60+"]
+CLIENT_PROFESSIONS = [
+    "student", "software engineer", "teacher", "accountant", "freelance artist",
+    "retired", "small business owner", "doctor", "gamer",
+
+    "data scientist", "QA tester", "digital marketer", "streamer", "crypto trader",
+    "system administrator", "UX/UI designer",
+
+    "photographer", "musician", "journalist", "video editor", "social media influencer",
+
+    "construction worker", "mechanic", "farmer", "truck driver", "chef", "plumber",
+
+    "HR manager", "sales representative", "lawyer", "financial analyst", "CEO", "real estate agent",
+
+    "stay-at-home parent", "fitness coach", "researcher", "barista", "professional athlete"
+]
+TECH_SAVVINESS = ["low (struggles with basic UI)", "medium (knows basics)", "high (experienced user)", "expert (developer/IT)"]
+CLIENT_TONES = ["polite", "anxious/panicked", "frustrated", "passive-aggressive", "rushed", "confused"]
+URGENCY_LEVELS = ["low (just asking)", "medium (needs it soon)", "high (blocking work/life)", "critical (losing money/time)"]
+
 # --- GENERATION SETTINGS ---
 
 # Parameters for generate.py
-GENERATION_MODEL = "gemini-2.5-flash"
+GENERATION_MODEL = "gemini-3-flash-preview"
 GENERATION_TEMP = 0.8
 
 # Parameters for analyze.py
-ANALYSIS_MODEL = "gemini-2.5-flash"
-ANALYSIS_TEMP = 0.0
+ANALYSIS_MODEL = "gemini-3-flash-preview"
+ANALYSIS_TEMP = 0.1
+
+THINKING_LEVEL = "low"
 
 # Number of messages per generated chat (approximate)
 MAX_CHAT_TURNS = 5
+
+# Number of conversations to generate for the dataset
+DATASET_SIZE = 50

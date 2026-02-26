@@ -2,33 +2,26 @@ import os
 import json
 import random
 import time
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 import config
 import prompts
 import models
 
-# Load API key securely
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
-# ==========================================
-# PARAMETERS
-# ==========================================
-# The number of conversations to generate
-DATASET_SIZE = 5
+client = genai.Client()
 
 
 # ==========================================
 
 def generate_random_config() -> dict:
-    """Randomly selects parameters for the chat scenario based on requirements."""
+    """Randomly selects ALL parameters for the chat scenario, including persona."""
     intent = random.choice(list(config.Intent)).value
     scenario = random.choice(list(config.CaseScenario)).value
     satisfaction = random.choice(list(config.Satisfaction)).value
 
-    # Add agent mistakes only if the scenario implies it
     mistakes = []
     if scenario in [config.CaseScenario.AGENT_MISTAKE.value, config.CaseScenario.CONFLICT.value,
                     config.CaseScenario.PROBLEMATIC.value]:
@@ -39,32 +32,40 @@ def generate_random_config() -> dict:
         "intent": intent,
         "scenario": scenario,
         "satisfaction": satisfaction,
-        "agent_mistakes": mistakes
+        "agent_mistakes": mistakes,
+        "age": random.choice(config.CLIENT_AGES),
+        "profession": random.choice(config.CLIENT_PROFESSIONS),
+        "tech_savviness": random.choice(config.TECH_SAVVINESS),
+        "tone": random.choice(config.CLIENT_TONES),
+        "urgency": random.choice(config.URGENCY_LEVELS)
     }
 
 
 def get_orchestrator_instructions(chat_config: dict) -> dict:
-    """Calls the Orchestrator to generate detailed prompts for the Client and Support agents."""
-    model = genai.GenerativeModel(
-        model_name=config.GENERATION_MODEL,
-        system_instruction=prompts.ORCHESTRATOR_SYSTEM_PROMPT
-    )
-
+    """Отримує системні промпти від Оркестратора використовуючи новий SDK."""
     mistakes_str = ", ".join(chat_config["agent_mistakes"]) if chat_config["agent_mistakes"] else "None"
 
     user_prompt = prompts.ORCHESTRATOR_USER_TEMPLATE.format(
         intent=chat_config["intent"],
         scenario=chat_config["scenario"],
         satisfaction=chat_config["satisfaction"],
-        mistakes=mistakes_str
+        mistakes=mistakes_str,
+        age=chat_config["age"],
+        profession=chat_config["profession"],
+        tech_savviness=chat_config["tech_savviness"],
+        tone=chat_config["tone"],
+        urgency=chat_config["urgency"]
     )
 
-    response = model.generate_content(
-        user_prompt,
-        generation_config=genai.GenerationConfig(
+    response = client.models.generate_content(
+        model=config.GENERATION_MODEL,
+        contents=user_prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=prompts.ORCHESTRATOR_SYSTEM_PROMPT,
             response_mime_type="application/json",
             response_schema=models.OrchestratorOutput,
-            temperature=config.GENERATION_TEMP
+            temperature=config.GENERATION_TEMP,
+            thinking_config={"thinking_level": config.THINKING_LEVEL}
         )
     )
 
@@ -72,19 +73,26 @@ def get_orchestrator_instructions(chat_config: dict) -> dict:
 
 
 def simulate_chat(instructions: dict) -> list:
-    """Runs the ping-pong dialogue loop between two AI agents."""
-    client_model = genai.GenerativeModel(
-        model_name=config.GENERATION_MODEL,
-        system_instruction=instructions["client_prompt"]
-    )
-    support_model = genai.GenerativeModel(
-        model_name=config.GENERATION_MODEL,
-        system_instruction=instructions["support_prompt"]
+    """Запускає цикл спілкування (Ping-Pong Loop) між агентами через новий SDK."""
+
+    # Створюємо сесію чату для агента-клієнта
+    client_chat = client.chats.create(
+        model=config.GENERATION_MODEL,
+        config=types.GenerateContentConfig(
+            system_instruction=instructions["client_prompt"],
+            temperature=config.GENERATION_TEMP,
+            thinking_config={"thinking_level": config.THINKING_LEVEL}
+        )
     )
 
-    # Start chat sessions to keep dialogue history automatically
-    client_chat = client_model.start_chat(history=[])
-    support_chat = support_model.start_chat(history=[])
+    # Створюємо сесію чату для агента-сапорта
+    support_chat = client.chats.create(
+        model=config.GENERATION_MODEL,
+        config=types.GenerateContentConfig(
+            system_instruction=instructions["support_prompt"],
+            temperature=config.GENERATION_TEMP
+        )
+    )
 
     transcript = []
 
@@ -115,12 +123,12 @@ def simulate_chat(instructions: dict) -> list:
     return transcript
 
 
-def main():
-    print(f"Starting generation of {DATASET_SIZE} conversations...\n")
+if __name__ == "__main__":
+    print(f"Starting generation of {config.DATASET_SIZE} conversations...\n")
     dataset = []
 
-    for i in range(DATASET_SIZE):
-        print(f"[{i + 1}/{DATASET_SIZE}] Generating chat...")
+    for i in range(config.DATASET_SIZE):
+        print(f"[{i + 1}/{config.DATASET_SIZE}] Generating chat...")
 
         try:
             # 1. Define conditions
@@ -136,13 +144,12 @@ def main():
             # 4. Save to dataset with ground truth labels
             chat_record = {
                 "id": f"chat_{i + 1:04d}",
-                "true_labels": chat_config,  # The golden standard for analyze.py
+                "true_labels": chat_config,
                 "orchestrator_context": instructions["scenario_context"],
                 "dialogue": transcript
             }
             dataset.append(chat_record)
             print(f"  -> Success! Turns: {len(transcript)}")
-
 
         except Exception as e:
             print(f"  -> Error during generation: {e}")
@@ -152,7 +159,3 @@ def main():
         json.dump(dataset, f, indent=4, ensure_ascii=False)
 
     print(f"\nDone! Dataset saved to dataset.json with {len(dataset)} records.")
-
-
-if __name__ == "__main__":
-    main()

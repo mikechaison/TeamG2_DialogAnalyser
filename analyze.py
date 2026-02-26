@@ -1,20 +1,23 @@
 import json
 import os
 import time
-import google.generativeai as genai
 from dotenv import load_dotenv
+
+# Правильні імпорти для нового SDK
+from google import genai
+from google.genai import types
 
 import config
 import models
 import prompts
 
-# Завантажуємо API ключ
+# Завантажуємо змінні середовища
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Клієнт автоматично підхопить ключ GEMINI_API_KEY з файлу .env
+client = genai.Client()
 
 
 def format_transcript(dialogue_list: list) -> str:
-    """Перетворює список повідомлень у текстовий транскрипт для зручного читання моделлю."""
     transcript = ""
     for msg in dialogue_list:
         role = msg.get("role", "unknown").upper()
@@ -24,26 +27,24 @@ def format_transcript(dialogue_list: list) -> str:
 
 
 def analyze_chat(transcript_text: str) -> dict:
-    """Відправляє транскрипт до LLM і повертає структурований JSON з оцінкою."""
-    model = genai.GenerativeModel(
-        model_name=config.ANALYSIS_MODEL,
-        system_instruction=prompts.ANALYZER_SYSTEM_PROMPT
-    )
+    """Відправляє транскрипт до LLM через новий SDK."""
 
-    # Використовуємо temperature=0.0 для детермінованості
-    response = model.generate_content(
-        f"Analyze the following transcript:\n\n{transcript_text}",
-        generation_config=genai.GenerationConfig(
+    response = client.models.generate_content(
+        model=config.ANALYSIS_MODEL,
+        contents=f"Analyze the following chat:\n\n{transcript_text}",
+        config=types.GenerateContentConfig(
+            system_instruction=prompts.ANALYZER_SYSTEM_PROMPT,
+            temperature=config.ANALYSIS_TEMP,
             response_mime_type="application/json",
             response_schema=models.AnalysisOutput,
-            temperature=config.ANALYSIS_TEMP
+            thinking_config={"thinking_level": config.THINKING_LEVEL}
         )
     )
 
     return json.loads(response.text)
 
 
-def main():
+if __name__ == "__main__":
     print("Starting analysis phase...")
 
     # Читаємо згенерований датасет
@@ -52,7 +53,7 @@ def main():
             dataset = json.load(f)
     except FileNotFoundError:
         print("Error: dataset.json not found. Run generate.py first.")
-        return
+        exit(1)
 
     analysis_results = []
 
@@ -69,22 +70,17 @@ def main():
             result_record = {
                 "id": chat["id"],
                 "analysis": analysis_data
-                # Опціонально: можна додати "true_labels": chat["true_labels"]
-                # для автоматичного розрахунку точності (Accuracy) вашого алгоритму
             }
 
             analysis_results.append(result_record)
             print(f"  -> Score: {analysis_data['quality_score']}, Intent: {analysis_data['intent']}")
 
+
         except Exception as e:
             print(f"  -> Error analyzing {chat['id']}: {e}")
 
-    # Зберігаємо результати аналізу
+            # Зберігаємо результати аналізу
     with open("analysis_results.json", "w", encoding="utf-8") as f:
         json.dump(analysis_results, f, indent=4, ensure_ascii=False)
 
     print(f"\nDone! Analysis saved to analysis_results.json.")
-
-
-if __name__ == "__main__":
-    main()
