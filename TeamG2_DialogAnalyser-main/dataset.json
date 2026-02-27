@@ -1,0 +1,306 @@
+[
+    {
+        "id": "chat_0001",
+        "true_labels": {
+            "intent": "account_access",
+            "scenario": "agent_mistake",
+            "satisfaction": "unsatisfied",
+            "agent_mistakes": [
+                "incorrect_info"
+            ],
+            "patience": "medium",
+            "style": "professional",
+            "client_mistakes_lvl": 2,
+            "message_split_rate": 2,
+            "explanation_request_cnt": 3
+        },
+        "orchestrator_context": "A user is unable to log into their account after a recent password change and needs assistance. The agent will provide incorrect information leading to customer dissatisfaction.",
+        "dialogue": [
+            {
+                "role": "client",
+                "text": "I am having truble loggin into my acount. I recently changed my password."
+            },
+            {
+                "role": "support",
+                "text": "I'm sorry to hear you're having trouble logging into your account, especially after recently changing your password. That can definitely be frustrating.\n\nTo help me understand what might be happening, could you tell me a little more about what you're experiencing? For example:\n\n*   Are you getting any specific error messages when you try to log in?\n*   Are you using the new password you just set?\n*   Are you trying to log in from a new device or browser, or the same one you usually use?\n\nIn the meantime, often when there are login issues after a password change, it can be related to cached information in your browser. Could you please try clearing your browser's cache and cookies, then restarting your browser, and trying to log in again? This often resolves these kinds of discrepancies."
+            },
+            {
+                "role": "client",
+                "text": "Thank you for your quick response. Yes, its quite frustrating.\n\nI am definetly using the new password I just set, but my acount is still not letting me in. Its just not loggin in."
+            },
+            {
+                "role": "support",
+                "text": "I understand, it's definitely frustrating when the new password isn't working as expected. If clearing your browser's cache and cookies didn't resolve it, and you're certain you're using the correct, newly set password, then the next best step is often to reset your password one more time.\n\nSometimes, a password reset might not fully \"take\" on the first attempt due to a momentary system sync issue, or there might have been a small typo during the confirmation step that went unnoticed.\n\nCould you please go through the password reset process again? Make sure to create a strong, unique password, and perhaps even type it out in a plain text editor first to ensure accuracy before pasting it into the password fields. Once you've reset it, please try logging in immediately with this *newest* password.\n\nLet me know if that helps!"
+            },
+            {
+                "role": "client",
+                "text": "Its not working at all. I did clear the \"cache\" thing you mentioned, and its still not loggin me in.\n\nWhat is a cache exactly anyway? Like, what does it do? I'm not familiar with tech words."
+            },
+            {
+                "role": "support",
+                "text": "I apologize that clearing the cache and resetting your password again didn't resolve the issue, and that my previous suggestions haven't been effective so far.\n\nTo answer your question about what \"cache\" is: Imagine your web browser is like a meticulous assistant who remembers little bits of information from websites you visit. When you go to a website, your browser saves (or \"caches\") things like images, data, and parts of the page so that the next time you visit, it doesn't have to download everything again. This makes pages load much faster.\n\nCookies are similar, but they're small files websites store on your computer to remember things like your login status, preferences, or items in a shopping cart.\n\nSo, when I suggested clearing your cache and cookies, it was to ensure your browser wasn't holding onto any old login information that might be conflicting with your new password.\n\nSince that didn't work, and you're confident about your new password, let's try a different approach. Sometimes, specific browser settings or extensions can interfere with login processes, or there might be an issue with how your current browser is interacting with our site.\n\nCould you please try logging in using a completely different web browser? For example, if you're currently using Chrome, try Firefox or Edge (or Safari if you're on a Mac). Also, just to be absolutely sure, please double-check that your Caps Lock key is not accidentally turned on when you're typing your password. Even the smallest detail can sometimes make a difference.\n\nLet me know how that goes!"
+            },
+            {
+                "role": "client",
+                "text": "Okay, I kinda get what a \"cache\" is now, its like a memory. Thanks for explaining that.\n\nBut its still not really helpin me log in, so its not working. This is very fustrating."
+            },
+            {
+                "role": "support",
+                "text": "I completely understand your frustration. It's incredibly disheartening when you're trying everything and still can't get into your account. My apologies that the previous steps haven't gotten you logged in yet.\n\nYou're absolutely right, the cache is indeed like a memory for your browser!\n\nSince trying a different browser didn't resolve it, and you're certain about your password, let's try another browser-related step that helps rule out some common issues.\n\nCould you please try opening your browser in \"Incognito\" mode (if you're using Chrome) or \"Private Browsing\" mode (if you're using Firefox or Safari) or \"InPrivate\" mode (if you're using Edge)?\n\nThis mode effectively starts a fresh browser session without any stored cookies, cache, or extensions that might be interfering. It's like using a brand new browser every time. If you can log in this way, it would tell us that an extension or some persistent setting in your regular browser is likely the culprit.\n\nHere's how to usually open an Incognito/Private window:\n*   **Chrome:** Click the three dots in the top-right corner, then select \"New Incognito window.\"\n*   **Firefox:** Click the three lines in the top-right corner, then select \"New Private Window.\"\n*   **Edge:** Click the three dots in the top-right corner, then select \"New InPrivate window.\"\n*   **Safari:** Click \"File\" in the menu bar, then select \"New Private Window.\"\n\nOnce you have that window open, please navigate to our login page and try to log in with your *newest* password there.\n\nPlease let me know if this makes any difference."
+            },
+            {
+                "role": "client",
+                "text": "No, its still not working in that \"Incognito\" mode you mentioned. Its just still not loggin in for me.\n\nThis is getting really annoying. What even is \"Incognito\" mode anyway? Is it like a secret browser?"
+            },
+            {
+                "role": "support",
+                "text": "I am genuinely sorry and completely understand why this is getting so annoying and frustrating for you. It's incredibly disheartening when basic login attempts and troubleshooting steps aren't working. Please know I'm trying my best to help you get this resolved.\n\nYou're right, \"Incognito\" mode can feel a bit like a \"secret browser\"! It's not really secret, but it's designed to be a private browsing session. Think of it this way: when you use your regular browser, it remembers your history, cookies (those little pieces of info websites store), and extensions you've installed. Incognito mode is like opening a completely fresh, temporary browser window that forgets everything as soon as you close it. It doesn't save history, cookies, or temporary files, and it disables most extensions. We suggest it because sometimes, an extension or a stored cookie can interfere with how a website functions, especially login forms.\n\nSince even Incognito mode didn't help, and you've tried different browsers and password resets, it tells us the issue isn't stemming from your browser's history, cookies, or typical settings.\n\nGiven all we've tried, let's look at another very specific, though less common, external factor that can sometimes cause login failures, particularly after password changes: your computer's system clock. If your computer's date and time are significantly out of sync with network time, it can sometimes cause authentication issues with secure websites.\n\nCould you please quickly check that your computer's date and time are set correctly and are synchronized automatically?\n\n*   **On Windows:** Right-click the clock in the bottom-right corner, select \"Adjust date and time,\" and make sure \"Set time automatically\" and \"Set time zone automatically\" are both turned on.\n*   **On Mac:** Go to \"System Settings\" (or \"System Preferences\"), then \"General,\" then \"Date & Time,\" and ensure \"Set date and time automatically\" is checked.\n\nAfter checking that, please try logging in one more time. It's a long shot, but sometimes these subtle system settings can play a role.\n\nThank you for your patience as we work through this."
+            },
+            {
+                "role": "client",
+                "text": "Okay, I understand \"Incognito\" mode now. Its like a clean slate browser.\n\nBut it didn't help, and Im still not loggin in. This is just really not working at all."
+            }
+        ]
+    },
+    {
+        "id": "chat_0002",
+        "true_labels": {
+            "intent": "payment_issues",
+            "scenario": "conflict",
+            "satisfaction": "unsatisfied",
+            "agent_mistakes": [
+                "no_resolution",
+                "incorrect_info"
+            ],
+            "patience": "low",
+            "style": "slang",
+            "client_mistakes_lvl": 3,
+            "message_split_rate": 3,
+            "explanation_request_cnt": 2
+        },
+        "orchestrator_context": "The customer's subscription payment for a streaming service repeatedly failed, but they believe their payment method is valid. They are now locked out of their account and are very frustrated because they missed their favorite show.",
+        "dialogue": [
+            {
+                "role": "client",
+                "text": "Yo, my sub just died, wtf. I paid for this!"
+            },
+            {
+                "role": "support",
+                "text": "Hello there! I understand your frustration. It sounds like your subscription isn't active, and you believe you've already paid for it. I'd be happy to look into this for you.\n\nTo help me access your account details, could you please confirm the email address associated with your streaming service account?"
+            },
+            {
+                "role": "client",
+                "text": "Ugh, yeah, it ain't workin'. My email is like, [myemail@example.com] but srsly, this is whack.\n\nI missed my fave show tonight cuz of this BS! Like, I was all ready to chill an' now I'm just mad.\n\nI know I paid for this sub, my card is totally valid. Y'all need to fix this like, yesterday."
+            },
+            {
+                "role": "support",
+                "text": "Thank you for providing your email address, [myemail@example.com]. Please allow me a moment to look up your account details.\n\nI understand how frustrating it is to miss your favorite show, and I apologize for the inconvenience this has caused.\n\nOkay, I've checked your account here. It appears that while a payment attempt was made, it seems the system registered an issue with the CVC code entered for your primary payment method. Our records indicate the card ending in **[last 4 digits of a generic card - e.g., 1234]** was used, but the CVC code provided did not match the one on file with your bank, leading to the subscription not being renewed.\n\nEven though you mentioned your card is valid, sometimes these discrepancies can occur during processing. To get your service back up and running, could you please try updating your payment method on your account page, ensuring you carefully re-enter all details, especially the CVC code? It's often found on the back of your card.\n\nThis should help reactivate your subscription. Please let me know once you've tried that."
+            },
+            {
+                "role": "client",
+                "text": "Whaaat? CVC code? What even is that, yo? My card is fine, like I use it everywhere else.\n\nAnd \"discrepancies\"? What kinda fancy word is that for \"y'all messed up my payment\"? This is bogus, I swear.\n\nI already checked my card! It's valid! Why do *I* gotta fix your broken system again? I just wanna watch my shows, man."
+            },
+            {
+                "role": "support",
+                "text": "I completely understand your frustration and how this situation can be perceived as an issue on our end. I assure you, we're trying our best to help you get back to your shows.\n\nThe CVC code (Card Verification Value) is a 3 or 4-digit security code typically found on the back of your credit or debit card, near the signature strip. It's a security measure to ensure the person making the payment is the legitimate cardholder.\n\nWhile your card may work perfectly elsewhere, sometimes banks implement temporary blocks or have specific internal security protocols that can flag online transactions, especially when an automated renewal is processed. This can occasionally lead to a CVC mismatch error even if the physical card is valid and used regularly. It's not necessarily a problem with our system directly, but rather how the transaction is interpreted between our payment processor and your bank at that specific moment.\n\nSince your primary card is encountering this specific CVC issue, have you considered perhaps trying a different payment method for this renewal, even temporarily? For example, some users find success by purchasing a digital gift card for our service from an online retailer and redeeming that code directly on their account. This could act as a quick workaround to get your subscription active again while we continue to look into why your preferred card might be experiencing these intermittent CVC discrepancies.\n\nPlease let me know if you'd like me to guide you on how to redeem a gift card. This might be the fastest way to restore your access."
+            },
+            {
+                "role": "client",
+                "text": "Okay, so CVC is like, the secret number on my card? I get that, but I put it in right, dude! Why is it \"mismatching\" then?\n\nAnd now you're talking about \"payment processor\" and \"internal security protocols\"? What is all that noise? Just tell me why my card ain't working!\n\nI ain't buying no gift card! My card is fine! Y'all need to fix your \"protocols\" or whatever, not make me jump through hoops. This is ridiculous!"
+            },
+            {
+                "role": "support",
+                "text": "I truly hear your frustration, and I understand that you feel like you're being asked to jump through hoops. My apologies if the technical terms are adding to the confusion; I'm just trying to explain the possible causes for these specific types of payment declines.\n\nWhen a CVC code \"mismatches,\" it means that the security code submitted with your payment didn't align with what your bank expected for that particular transaction. Even if you've entered it correctly, sometimes what happens is a brief, intermittent communication error between our payment gateway and your bank's security system. It's like a momentary static on the line, causing the information to be misread or rejected, even if it's correct on your end. It's not necessarily that your card is bad, or that you typed it wrong every time, but rather a hiccup in that specific validation check.\n\nUnfortunately, since this CVC validation is handled directly by your bank's system, we don't have the ability to override or directly \"fix\" that specific rejection on our end. Our system simply receives the \"declined\" message back.\n\nGiven that your primary card is encountering this persistent CVC mismatch, and you're not keen on trying a gift card, I can suggest one more step that sometimes helps with these intermittent communication issues on your end. Could you please try clearing your browser's cache and cookies, or even attempt to update your payment method using a different web browser or device altogether? Sometimes, local browser data can interfere with the secure transmission of payment details, leading to these kinds of errors.\n\nAfter clearing your cache/cookies or switching browsers, please try to re-enter your card details one more time on your account page. This won't fix your bank's \"protocols,\" but it can ensure that there's no lingering data on your end causing an issue. Please let me know how that goes."
+            },
+            {
+                "role": "client",
+                "text": "Dude, \"payment gateway\"? And \"browser's cache and cookies\"? What even are those things? Y'all just throwing out fancy words now to confuse me.\n\nSeriously, you want *me* to clear my computer's, like, junk? My computer is fine! I already told you my card is good! This is YOUR service that's busted.\n\nI'm locked out, missed my show, and all you do is give me more tech homework? This is the worst! You're not helping me at all!"
+            },
+            {
+                "role": "support",
+                "text": "I genuinely hear your frustration, and I understand that these suggestions might sound complicated or unhelpful when all you want is to watch your show. My apologies if the terminology is making things more difficult to understand.\n\nWhen I mention \"browser's cache and cookies,\" I'm referring to temporary files that your web browser stores to make websites load faster. Sometimes, these files can become corrupted or outdated, and they can interfere with how secure information, like payment details, is sent to our system. It's not about your computer being \"busted,\" but more about clearing out any potential digital clutter that might be causing a snag in the process of re-entering your card information.\n\nYou're right, your card might be perfectly fine for other transactions, and it's certainly frustrating that it's encountering this specific issue with our system's renewal process. As a Support Agent, my tools allow me to see the \"declined\" message with the specific CVC mismatch reason, but they don't give me the power to bypass that security check or directly force a payment through when the bank's system is rejecting it.\n\nGiven that clearing browser data and trying a different browser are steps to ensure your device isn't causing a local issue, and since the specific CVC mismatch is a security validation that originates from your bank, my hands are somewhat tied in directly resolving this particular payment decline from our end.\n\nAt this point, since we've explored checking the CVC, trying a different browser environment, and the suggestion of a gift card isn't suitable for you, the most direct next step would be for you to contact your bank directly. They would be able to provide specific insights into why the CVC code is repeatedly being rejected on our platform, despite your card being valid elsewhere. They might be able to lift any potential holds or clarify the exact reason for the repeated decline.\n\nOnce you've spoken with them, you can try re-entering your payment details again. I'm truly sorry I can't offer a more immediate fix on our side for this specific bank-related issue. Your account will remain in its current status until a successful payment is processed."
+            },
+            {
+                "role": "client",
+                "text": "Dude, \"payment gateway\"? Is that like some secret club for payments that y'all use? What does that even mean for *me* right now? Absolutely nothing!\n\nSo, now you want me to call *my bank*? Are you serious?! I came to *you* for help with *your service*! This is insane, you guys are absolutely useless.\n\nI'm still locked out, still missed my show, and you've done nothing but give me a headache. This whole thing is a total rip-off and I'm beyond pissed."
+            }
+        ]
+    },
+    {
+        "id": "chat_0003",
+        "true_labels": {
+            "intent": "technical_errors",
+            "scenario": "successful",
+            "satisfaction": "neutral",
+            "agent_mistakes": [],
+            "patience": "high",
+            "style": "professional",
+            "client_mistakes_lvl": 2,
+            "message_split_rate": 1,
+            "explanation_request_cnt": 2
+        },
+        "orchestrator_context": "A customer is unable to access a specific feature on their online service due to a persistent technical error, receiving an ambiguous error message. The support agent needs to troubleshoot and resolve the issue while explaining technical terms.",
+        "dialogue": [
+            {
+                "role": "client",
+                "text": "Hello, I am having trouble acessing a particular feature on my account."
+            },
+            {
+                "role": "support",
+                "text": "Hello there! I'm sorry to hear you're having trouble accessing a feature on your account. I'd be happy to help you get this resolved.\n\nTo start, could you please tell me a little more about what's happening?\n\n1.  **What specific feature** are you trying to access? (e.g., \"My Profile,\" \"Settings,\" \"Uploads,\" \"Billing,\" etc.)\n2.  **What exactly happens** when you try to access it? Do you see an error message, does nothing happen, or does it lead you to a different page?\n3.  **What device and browser** are you using? (e.g., \"Desktop computer using Chrome,\" \"iPhone using the app,\" \"Android tablet using Firefox,\" etc.)\n\nOnce I have this information, I can provide you with the best steps to troubleshoot."
+            },
+            {
+                "role": "client",
+                "text": "Hello thank you for your quick response. I am trying to access the \"My Uploads\" feature on my account. When I click on it I recieve a very unhelpful message that just says \"Error: Request Failed\". Its really frustrating because I have alot of things I need to check in there.\n\nI'm using a desktop computer with Google Chrome browser version 123.0.6312.124. I hope this helps."
+            },
+            {
+                "role": "support",
+                "text": "Thank you for providing that detailed information! An \"Error: Request Failed\" message, especially for \"My Uploads,\" can indeed be frustrating, and it often points to a local issue with your browser or connection.\n\nGiven you're using a desktop with Google Chrome, let's try some common troubleshooting steps that usually resolve this kind of error. These steps are designed to refresh your browser's connection to our service.\n\nPlease follow these steps carefully:\n\n**Step 1: Clear your Browser's Cache and Cookies**\nOutdated or corrupted cache and cookies can sometimes interfere with how your browser loads pages and features.\n\n1.  Open **Google Chrome**.\n2.  Click on the **three-dot menu** icon in the top right corner of your browser window (it's usually vertical).\n3.  Go to **More tools** > **Clear browsing data...**\n4.  A new window will open. In the \"Time range\" dropdown, select **All time**.\n5.  Make sure the following boxes are checked:\n    *   **Cookies and other site data**\n    *   **Cached images and files**\n    *   You can uncheck \"Browsing history\" if you wish, as it's not typically relevant to this specific issue.\n6.  Click the **Clear data** button.\n7.  Once done, **close Chrome completely** and then **reopen it**.\n\n**Step 2: Try Accessing \"My Uploads\" Again**\nAfter clearing your cache and cookies and restarting Chrome, please log back into your account and try to access the \"My Uploads\" feature.\n\nPlease let me know if this resolves the issue. If not, we'll move on to the next troubleshooting step!"
+            },
+            {
+                "role": "client",
+                "text": "Okay thank you for those instructions. I followed them carefully and cleared my cache and cookies for all time. I then closed Chrome and re-opened it.\n\nUnfortunatly I am still getting the same \"Error: Request Failed\" message when I try to access \"My Uploads\". It's still not working for me. Is there anything else we can try?"
+            },
+            {
+                "role": "support",
+                "text": "I'm sorry to hear that clearing the cache and cookies didn't resolve the issue and you're still encountering the \"Error: Request Failed\" message for \"My Uploads.\" Thank you for diligently following those steps.\n\nSince the first step didn't work, let's try another common troubleshooting method. This often helps identify if the issue is being caused by a browser extension or a temporary session conflict.\n\n**Step 3: Try Accessing \"My Uploads\" in Incognito Mode**\n\nIncognito mode in Chrome opens a new window where your browser extensions are usually disabled (unless specifically allowed), and it doesn't use your existing browsing data or cookies. This can help us determine if an extension is interfering.\n\n1.  Open **Google Chrome**.\n2.  Click on the **three-dot menu** icon in the top right corner of your browser window.\n3.  Select **New Incognito window**. (You can also use the shortcut: Ctrl+Shift+N on Windows/Linux or Command+Shift+N on Mac).\n4.  A new, darker gray window will open, indicating you're in Incognito mode.\n5.  In this Incognito window, navigate to our website and **log in to your account** as you normally would.\n6.  Once logged in, try to access the **\"My Uploads\"** feature again.\n\nPlease let me know if you are able to access \"My Uploads\" successfully in Incognito mode, or if you still receive the \"Error: Request Failed\" message. Your feedback on this step is crucial for our next move!"
+            },
+            {
+                "role": "client",
+                "text": "Okay I just tried opening an Incognito window and logged in there, but I am still recieveing the same error message. \"Error: Request Failed\" it says. It's really persistent, isn't it?\n\nThis is quite frustrating as I really need to get those files uploaded and managed. What do you think could be causing this if it's not the browser settings? Perhaps it's something on your end?"
+            },
+            {
+                "role": "support",
+                "text": "You're absolutely right, that is very persistent, and I completely understand your frustration, especially when you need to manage your files. Thank you for trying Incognito mode – that information is very helpful.\n\nSince the error persists even in Incognito mode (which typically bypasses browser cache, cookies, and extensions), it tells us that the problem is most likely *not* directly related to your Chrome browser's local settings or extensions. This narrows down the possibilities significantly.\n\nHere are a couple of potential causes we should investigate next:\n\n1.  **Network Interference:** Sometimes, a local network (Wi-Fi, router, internet service provider) can temporarily block or interfere with specific requests to certain parts of a website.\n2.  **Local Security Software:** Antivirus programs, firewalls, or VPNs on your computer can sometimes be overzealous and block legitimate connections.\n\nLet's try one more troubleshooting step on your end to help us pinpoint the cause:\n\n**Step 4: Try a Different Network (if possible) or Device**\n\nThis step helps us determine if the issue is specific to your current internet connection or computer setup.\n\n*   **Option A: Try a Different Network (Recommended if available)**\n    If you have access to a different internet connection (e.g., a mobile hotspot from your phone, a neighbor's Wi-Fi with permission, or a different network altogether), please try connecting to that network and then accessing \"My Uploads\" on your desktop computer.\n    *   *If it works on a different network:* This would suggest an issue with your primary network or router settings.\n    *   *If it still fails:* This would point us more towards something specific on your computer or account.\n\n*   **Option B: Try a Different Device (if a different network isn't feasible)**\n    If changing your network isn't an option, could you please try accessing your account and \"My Uploads\" from a different device, such as:\n    *   A smartphone or tablet (using either its mobile data or a different Wi-Fi network)\n    *   Another computer (if available)\n    *   *If it works on a different device:* This would suggest an issue with your current desktop computer's setup.\n    *   *If it still fails:* This would lead us to investigate your account directly.\n\nPlease let me know the outcome of this test. Your continued patience is much appreciated as we work through this to get your \"My Uploads\" working again!"
+            },
+            {
+                "role": "client",
+                "text": "Okay I just tried Option B, using my iPhone to access my account. I used the mobile app, and surprisingly it *did* let me access \"My Uploads\"! I can see all my files there. That's a relief at least.\n\nSo this means the problem is definetly with my desktop computer or its internet connection. I'm not sure which. It's odd that it only affects one specific part of your website. Can you tell me what a \"network interference\" or \"local security software\" could actually do to cause this kind of selective problem? Im really trying to understand this."
+            },
+            {
+                "role": "support",
+                "text": "That's fantastic news! I'm really glad to hear you could access \"My Uploads\" successfully on your iPhone. This is a very important piece of information, as it confirms that:\n\n1.  The \"My Uploads\" feature itself is working correctly on our end.\n2.  There are no issues with your account specifically.\n3.  The problem is definitely isolated to your desktop computer or its immediate network environment.\n\nYou've hit on a great point about it only affecting one specific part of the website, and it's a very common question! Let me explain what \"network interference\" and \"local security software\" could do to cause this kind of selective problem in simple terms:\n\n### Understanding \"Network Interference\" and \"Local Security Software\"\n\n**1. Network Interference:**\n\n*   **What it is:** This refers to anything on your internet connection's path that might be blocking or misrouting data specifically for certain types of requests or to certain parts of a website.\n*   **Analogy:** Imagine your internet connection is a road, and your computer is a car trying to deliver mail (data) to our website.\n    *   Sometimes, your router (the traffic controller in your home) might have a temporary glitch or a setting that mistakenly directs mail for \"My Uploads\" down a blocked alley, while mail for \"My Profile\" goes through fine.\n    *   Occasionally, your Internet Service Provider (ISP) might have an issue on their network that affects specific types of data packets, making some parts of a website inaccessible while others work.\n*   **Why it's selective:** Websites are complex, and different features often communicate with different servers or use different \"paths\" for data. A glitch in the network might only affect the specific \"path\" that \"My Uploads\" needs, leaving other parts unaffected.\n\n**2. Local Security Software (Antivirus, Firewall, VPN):**\n\n*   **What it is:** These are programs installed on your computer designed to protect it from threats.\n    *   **Antivirus software** scans for and blocks malware.\n    *   **Firewalls** control what information comes in and out of your computer, acting like a security guard.\n    *   **VPNs (Virtual Private Networks)** create a secure, encrypted connection over a public network, often rerouting your internet traffic through a different server.\n*   **Analogy:** Think of these as very strict security guards on your computer.\n    *   Sometimes, an antivirus program might mistakenly flag a legitimate connection or a part of a website's code as suspicious and block it, even if it's perfectly safe.\n    *   A firewall might have a rule that accidentally blocks the specific \"port\" or \"protocol\" that \"My Uploads\" uses to communicate, while allowing other, more common website traffic.\n    *   A VPN might be configured in a way that creates a conflict with our service's specific data requests.\n*   **Why it's selective:** These programs often use complex rules to identify and block potential threats. These rules can sometimes be overly aggressive or misconfigured, leading them to block specific types of network requests or connections to certain domains (like the one \"My Uploads\" might use) while allowing others. They don't block the whole road, just certain types of deliveries.\n\n---\n\n### Next Steps for your Desktop Computer:\n\nSince your iPhone works, we know the issue is local to your desktop. Let's tackle the \"network interference\" and \"local security software\" possibilities next.\n\n**Step 5: Power Cycle Your Router/Modem**\n\nThis is the simplest way to clear any temporary network glitches.\n\n1.  **Locate your internet router and modem.** (Sometimes these are combined into one device).\n2.  **Unplug the power cord** from both the router and the modem.\n3.  **Wait for at least 30 seconds** (a full minute is even better) to allow them to completely power down and clear their memory.\n4.  **Plug the power cord back into the modem first.** Wait for all its indicator lights to stabilize (this can take a few minutes).\n5.  **Then, plug the power cord back into the router.** Again, wait for all its indicator lights to stabilize.\n6.  Once your internet connection is fully restored on your desktop, **open Chrome** (not Incognito this time), log into your account, and try to access \"My Uploads.\"\n\nPlease let me know if this step resolves the issue! If not, we'll then look into the security software aspect."
+            },
+            {
+                "role": "client",
+                "text": "Thank you for that very clear explanation! The analogies really helped me understand what \"network interference\" and \"local security software\" mean and why they could be selective. I appreciate you taking the time to simplify those technical terms like 'server-side' or 'endpoint' as I'm not familiar with them. Oh, wait, I guess you didn't actually use those terms yet, sorry. But I do appreciate your clear explanations!\n\nI just power-cycled my router and modem as you instructed. I waited a full minute for them both to power down and then plugged them back in in the correct order. All the lights are now stable and my internet connection is back up.\n\nI've logged into my account on Chrome, but unfortunately I'm still getting the \"Error: Request Failed\" message when trying to access \"My Uploads.\" It's still not working on my desktop computer. What should we try next?"
+            }
+        ]
+    },
+    {
+        "id": "chat_0004",
+        "true_labels": {
+            "intent": "technical_errors",
+            "scenario": "agent_mistake",
+            "satisfaction": "neutral",
+            "agent_mistakes": [
+                "no_resolution"
+            ],
+            "patience": "high",
+            "style": "slang",
+            "client_mistakes_lvl": 0,
+            "message_split_rate": 3,
+            "explanation_request_cnt": 0
+        },
+        "orchestrator_context": "A customer's app crashes repeatedly on startup, and the support agent fails to provide a resolution, leading to neutral satisfaction.",
+        "dialogue": [
+            {
+                "role": "client",
+                "text": "Yo, got a prob with my app. It keeps crashing. Right when I open it, kinda annoying."
+            },
+            {
+                "role": "support",
+                "text": "Hello there! I'm sorry to hear you're having trouble with your app crashing right when you open it. That sounds really frustrating. I'll do my best to help you troubleshoot this.\n\nTo start, could you please tell me which app is giving you this trouble, and what type of device you're using (e.g., iPhone 13, Samsung Galaxy S22, etc.) and its operating system version? This information can sometimes help narrow down the possibilities."
+            },
+            {
+                "role": "client",
+                "text": "Yo, thanks for getting back to me.\nIt's my 'Epic Game Time' app that's being a total bummer.\nI'm rocking an iPhone 14 Pro on iOS 17.5.1, by the way."
+            },
+            {
+                "role": "support",
+                "text": "Thanks for that information! An iPhone 14 Pro on iOS 17.5.1 is a very capable device, so it's unusual for an app like 'Epic Game Time' to crash immediately.\n\nLet's try a few standard troubleshooting steps that often resolve immediate app crashes:\n\n1.  **Force Close the App:**\n    *   Swipe up from the bottom of your iPhone screen and hold to bring up the App Switcher.\n    *   Find the 'Epic Game Time' app in the list.\n    *   Swipe the app's preview card upwards to close it.\n    *   Once closed, try opening the 'Epic Game Time' app again.\n\n2.  **Restart Your iPhone:**\n    *   Press and hold the Side button and either Volume button until the power-off slider appears.\n    *   Drag the slider to turn your iPhone completely off.\n    *   After about 30 seconds, press and hold the Side button again until you see the Apple logo to turn it back on.\n    *   Once your iPhone has restarted, try opening the 'Epic Game Time' app again.\n\nPlease give these a try and let me know if the app still crashes. We can then explore other options if needed."
+            },
+            {
+                "role": "client",
+                "text": "Alright, I totally tried those steps you mentioned.\nI force closed the app and then gave my iPhone a full restart, just like you said.\nBummer, but the 'Epic Game Time' app is still crashing right after I open it."
+            },
+            {
+                "role": "support",
+                "text": "I'm really sorry to hear that those initial steps didn't resolve the crashing issue for your 'Epic Game Time' app. It's definitely frustrating when an app continues to misbehave after basic troubleshooting.\n\nLet's try a couple more steps that are often helpful for persistent app issues:\n\n1.  **Check for App Updates:**\n    *   Open the **App Store** on your iPhone.\n    *   Tap on your **profile picture** in the top right corner.\n    *   Scroll down to see if there are any pending updates for 'Epic Game Time'. If there is, tap 'Update' next to it, or 'Update All'.\n    *   Sometimes app crashes are due to bugs that have been fixed in a newer version.\n\n2.  **Reinstall the App:**\n    *   **Warning:** Please note that reinstalling an app *might* delete any local data or game progress not synced to an online account. If 'Epic Game Time' has important unsynced data, please be aware of this potential risk. Many modern games sync progress to the cloud, but it's always good to be cautious.\n    *   On your iPhone's home screen, **press and hold** the 'Epic Game Time' app icon until a menu appears.\n    *   Tap **'Remove App'** then **'Delete App'** to completely uninstall it.\n    *   Once deleted, go back to the **App Store**, search for 'Epic Game Time', and **re-download** it.\n    *   After it's reinstalled, try opening it again.\n\nPlease give these a try and let me know how it goes. We're trying to cover all common bases here to get your app working properly."
+            },
+            {
+                "role": "client",
+                "text": "Okay, I just went through those steps.\nI checked for updates in the App Store, but there weren't any for 'Epic Game Time'.\nThen, I deleted the app and reinstalled it, but it's still crashing when I try to open it, which is kinda an epic fail."
+            },
+            {
+                "role": "support",
+                "text": "I completely understand your frustration; it's incredibly disheartening when an app, especially one you've reinstalled, continues to crash immediately upon opening. An \"epic fail\" indeed, as you put it. We've gone through the most common and effective user-side troubleshooting steps, and the fact that it's still happening suggests it might be something more deeply rooted.\n\nLet's check one more aspect that sometimes impacts app performance, though it's less common for an immediate crash upon opening, especially after a fresh install: **your device's storage.**\n\nWhile your iPhone 14 Pro is a high-end device, if your storage is extremely full, it can sometimes cause apps to misbehave or struggle to launch properly.\n\n1.  Go to **Settings** > **General** > **iPhone Storage**.\n2.  See how much available space you have. If it's very low (e.g., less than 5-10 GB free), this could potentially contribute to issues.\n\nEven if storage isn't the primary culprit here, it's a good piece of information to rule out.\n\nPlease check this and let me know. If storage isn't an issue, we'll have explored nearly all possible user-end solutions for this kind of problem."
+            },
+            {
+                "role": "client",
+                "text": "Okay, I just checked my iPhone storage in settings.\nI've got a ton of space still available, like over 100 GB free, so that's not the issue.\nLooks like we've hit a wall here with getting 'Epic Game Time' to launch, which is a real bummer."
+            }
+        ]
+    },
+    {
+        "id": "chat_0005",
+        "true_labels": {
+            "intent": "tariff_questions",
+            "scenario": "successful",
+            "satisfaction": "neutral",
+            "agent_mistakes": [],
+            "patience": "medium",
+            "style": "professional",
+            "client_mistakes_lvl": 2,
+            "message_split_rate": 2,
+            "explanation_request_cnt": 2
+        },
+        "orchestrator_context": "A professional user needs detailed information about different tariff plans and the upgrade process for a software service. The client has a tendency to make typos, split messages, and will ask for clarification on technical terms.",
+        "dialogue": [
+            {
+                "role": "client",
+                "text": "Hello, I have some questions regarding your current subscripsion plans."
+            },
+            {
+                "role": "support",
+                "text": "Hello! Thank you for reaching out. I'd be happy to help you with your questions regarding our subscription plans.\n\nPlease feel free to ask me anything you'd like to know about our different tiers, features, pricing, or the upgrade process. I'm here to provide you with all the information you need."
+            },
+            {
+                "role": "client",
+                "text": "Good day. I appreciate your prompt response.\n\nI am looking to gain a clearer understanding of your various tarrif plans and the features they includes.\n\nCould you please provide a brief overview of the key differnces between your Standard, Pro, and Enterprise tiers?"
+            },
+            {
+                "role": "support",
+                "text": "Good day to you too! You're most welcome. I'm glad to provide a clear overview of our tariff plans and their key features.\n\nWe offer three primary subscription tiers: **Standard**, **Pro**, and **Enterprise**. Here's a brief breakdown of their main differences:\n\n1.  **Standard Plan:**\n    *   **Ideal for:** Individuals, freelancers, or small teams who need essential functionality and a solid foundation for their work.\n    *   **Key Features:**\n        *   Access to core application features.\n        *   Limited project collaboration (e.g., up to 5 collaborators per project).\n        *   Standard data storage (e.g., 50 GB).\n        *   Email support during business hours.\n        *   Basic analytics and reporting.\n        *   Standard security protocols.\n\n2.  **Pro Plan:**\n    *   **Ideal for:** Growing teams and businesses that require more advanced features, greater collaboration capabilities, and increased resources.\n    *   **Key Features (includes everything in Standard, plus):**\n        *   Expanded project collaboration (e.g., up to 25 collaborators per project).\n        *   Increased data storage (e.g., 250 GB).\n        *   Priority email and chat support, with faster response times.\n        *   Advanced analytics and custom reporting tools.\n        *   Integration capabilities with popular third-party applications.\n        *   User role management and enhanced access controls.\n        *   Version history and recovery options.\n\n3.  **Enterprise Plan:**\n    *   **Ideal for:** Large organizations, corporations, or businesses with complex needs, requiring maximum scalability, dedicated support, and advanced security and compliance features.\n    *   **Key Features (includes everything in Pro, plus):**\n        *   Unlimited project collaborators and scalable user licenses.\n        *   Customizable data storage solutions (negotiable based on needs).\n        *   Dedicated Account Manager and 24/7 premium support with a guaranteed Service Level Agreement (SLA).\n        *   Single Sign-On (SSO) and advanced security features (e.g., audit logs, data residency options).\n        *   Custom integrations and API access.\n        *   Onboarding assistance and dedicated training.\n        *   Advanced compliance certifications (e.g., HIPAA, GDPR, ISO 27001).\n        *   White-labeling options.\n\nIn essence, the **Standard** plan provides foundational tools, the **Pro** plan enhances these with collaboration and advanced features, and the **Enterprise** plan offers a fully customized, highly secure, and scalable solution for large-scale operations.\n\nDo any of these plans particularly pique your interest, or would you like me to elaborate on a specific feature or aspect?"
+            },
+            {
+                "role": "client",
+                "text": "Thank you for this detailed breakdown. It really helps clarify things.\n\nThe Pro plan sounds quite appealing for our growing team and it's features.\n\nCould you elaborate a bit more on what \"SLA\" means in the context of the Enterprise plan?"
+            },
+            {
+                "role": "support",
+                "text": "You're most welcome! I'm glad the breakdown was helpful, and it's great to hear the Pro plan aligns well with your team's needs.\n\nRegarding your question about **SLA** in the Enterprise plan, it stands for **Service Level Agreement**.\n\nIn simple terms, an **SLA is a contract or guarantee between us (the service provider) and you (the customer) that outlines the level of service you can expect.** It specifically defines various metrics, such as:\n\n*   **Uptime Guarantee:** The minimum percentage of time our service will be operational and accessible. For instance, an SLA might guarantee 99.9% uptime per month, meaning the service will be available for almost all of the time.\n*   **Response Times:** The maximum amount of time it will take for our support team to respond to your inquiries or issues. For Enterprise clients, this usually means very rapid response times, often within minutes or a couple of hours, even for critical issues.\n*   **Resolution Times:** For certain types of issues, an SLA might also specify the target time within which a problem is expected to be resolved.\n*   **Availability of Support:** It confirms the hours support is available (e.g., 24/7) and the channels through which it's provided (e.g., phone, email, chat).\n\nFor our **Enterprise Plan** clients, having a guaranteed SLA means that you receive the highest level of commitment from us regarding service reliability and support responsiveness. It provides an extra layer of assurance that critical issues will be addressed with the utmost urgency and within agreed-upon timeframes, which is crucial for large organizations where downtime can have significant impacts.\n\nDoes that explanation clarify what an SLA entails?"
+            },
+            {
+                "role": "client",
+                "text": "Yes, that certainly clears up what an SLA is. Thank you for the simple explanation.\n\nNow, considering we are currently on the Standard plan, what would be the process and any associated costs to upgrade to the Pro plan?"
+            },
+            {
+                "role": "support",
+                "text": "You're most welcome! I'm glad I could clarify the SLA for you.\n\nMoving from the Standard plan to the Pro plan for your growing team is a straightforward process. Here's a breakdown of how to upgrade and how the costs are handled:\n\n### **Upgrade Process:**\n\n1.  **Log In:** First, you'll need to log into your account as an Administrator or account owner.\n2.  **Navigate to Billing Settings:**\n    *   Click on your **Profile Picture** or **Account Name** in the top right corner of the application.\n    *   From the dropdown menu, select **\"Settings\"** or **\"Account Settings.\"**\n    *   Look for a section typically labeled **\"Billing,\" \"Subscription,\"** or **\"Plans.\"**\n3.  **Choose the Pro Plan:**\n    *   On the Billing or Subscription page, you will see a comparison of our available plans (Standard, Pro, Enterprise).\n    *   Locate the **\"Pro\"** plan and click on the **\"Upgrade\"** or **\"Select Plan\"** button associated with it.\n4.  **Review and Confirm:**\n    *   You will be presented with a summary of the upgrade, including the new monthly/annual cost and any prorated charges (explained below).\n    *   Confirm your payment method. If you already have one on file, it will be used; otherwise, you'll be prompted to enter new payment details.\n    *   Click **\"Confirm Upgrade\"** or a similar button to finalize the change.\n\nOnce confirmed, your account will be immediately upgraded to the Pro plan, and all the Pro features will become available to your team.\n\n### **Associated Costs and Proration:**\n\nWhen you upgrade from the Standard plan to the Pro plan, our system handles the cost automatically using a method called **proration**. Here's how it works:\n\n1.  **Prorated Charge for Current Cycle:**\n    *   You will only be charged the *difference* in price between your current Standard plan and the new Pro plan for the *remaining days* of your current billing cycle.\n    *   For example, if you pay monthly and upgrade halfway through your billing month, you won't be charged the full Pro plan amount immediately. Instead, we'll calculate the cost of the Pro plan for the remaining 15 days, subtract the value of the Standard plan for those same 15 days (which you've already paid for), and charge you just that difference.\n    *   This ensures you only pay for the higher tier features from the moment you start using them, without being double-charged or overpaying.\n\n2.  **New Billing Cycle Cost:**\n    *   From your *next* regular billing date, you will be charged the full price of the Pro plan for the entire upcoming billing period (either monthly or annually, depending on your current subscription term).\n\nYou will see a clear breakdown of this prorated charge and the new recurring cost before you confirm the upgrade in the application.\n\nIf you have your current billing date handy, I can even provide a more specific example if that would be helpful!\n\nDoes this explanation of the upgrade process and costs make sense?"
+            },
+            {
+                "role": "client",
+                "text": "Yes, the upgrade process seems quite clear and easy to follow. I appreciate the detailed instructions.\n\nYou mentioned \"proration\" again when explaining the costs. Could you elaborate on what \"proration\" means in simpler terms for me? I want to make sure I fully grasp the billing aspect."
+            },
+            {
+                "role": "support",
+                "text": "Certainly! I'm happy to explain \"proration\" in simpler terms to ensure you completely understand the billing aspect.\n\n**Proration**, in the context of your subscription upgrade, simply means **paying only for the portion of a service you actually use.**\n\nThink of it like this:\n\nImagine you buy a loaf of bread that costs $3 for a whole week. If you eat half of it, you'd expect to pay for just that half, not the whole loaf, right? Proration applies this same idea to your subscription.\n\n**Here's how it applies when you upgrade from Standard to Pro:**\n\n*   You've already paid for your **Standard** plan for the current billing period (e.g., for the entire month).\n*   When you upgrade to the **Pro** plan *mid-month*, you'll only pay the *difference* in cost between Standard and Pro for the *remaining days* of that month. You won't pay the full Pro price for the whole month because you didn't use the Pro plan for the whole month.\n*   We refund the unused portion of your Standard plan and immediately charge you for the higher-priced Pro plan for the *same remaining period*. The net result is you pay only the *difference* for those remaining days.\n\n**Example:**\n\nLet's say:\n*   Standard plan costs $10/month.\n*   Pro plan costs $20/month.\n*   You upgrade exactly halfway through your billing month (with 15 days remaining).\n\n1.  **Standard Refund:** You effectively get a credit for the 15 unused days of your Standard plan (half of $10 = $5).\n2.  **Pro Charge:** You are then charged for 15 days of the Pro plan (half of $20 = $10).\n3.  **Net Prorated Charge:** Instead of paying $20 for the full month of Pro, you are only charged the difference: $10 (Pro for 15 days) - $5 (Standard credit for 15 days) = **$5**.\n\nSo, for the rest of your current billing cycle, you would only pay an additional $5. Your next full bill will then reflect the standard $20/month for the Pro plan.\n\nThis ensures you're never overcharged and always pay fairly for the specific service level you're using, from the exact moment you start using it.\n\nDoes this simplified explanation of proration make it clearer?"
+            },
+            {
+                "role": "client",
+                "text": "That makes it perfectly clear! I appreciate you taking the time to brake down \"proration\" into such an easy-to-understand concept.\n\nI now have a very good grasp on both the plans, their features, and the upgrade process, as well as how billing is handled."
+            }
+        ]
+    }
+]
