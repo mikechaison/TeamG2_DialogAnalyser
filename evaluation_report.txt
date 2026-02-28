@@ -6,7 +6,7 @@ DETAILED MISMATCH REPORT (Discrepancies):
     Received:    ['ignored_question', 'no_resolution', 'rude_tone']
 [chat_0008] Mistakes mismatch (Jaccard: 66.7%):
     Expected: ['no_resolution', 'incorrect_info']
-    Received:    ['no_resolution', 'incorrect_info', 'rude_tone']
+    Received:    ['no_resolution', 'rude_tone', 'incorrect_info']
 [chat_0009] Satisfaction error: expected 'neutral', got 'unsatisfied'
 [chat_0010] Mistakes mismatch (Jaccard: 0.0%):
     Expected: ['no_resolution', 'unnecessary_escalation']
@@ -17,8 +17,8 @@ DETAILED MISMATCH REPORT (Discrepancies):
     Received:    []
 [chat_0015] Satisfaction error: expected 'neutral', got 'satisfied'
 [chat_0016] Mistakes mismatch (Jaccard: 50.0%):
-    Expected: ['unnecessary_escalation', 'rude_tone']
-    Received:    ['ignored_question', 'no_resolution', 'unnecessary_escalation', 'rude_tone']
+    Expected: ['rude_tone', 'unnecessary_escalation']
+    Received:    ['ignored_question', 'no_resolution', 'rude_tone', 'unnecessary_escalation']
 [chat_0018] Mistakes mismatch (Jaccard: 0.0%):
     Expected: ['no_resolution', 'unnecessary_escalation']
     Received:    []
@@ -27,8 +27,8 @@ DETAILED MISMATCH REPORT (Discrepancies):
     Received:    ['ignored_question', 'rude_tone']
 [chat_0021] Satisfaction error: expected 'neutral', got 'satisfied'
 [chat_0024] Mistakes mismatch (Jaccard: 66.7%):
-    Expected: ['unnecessary_escalation', 'incorrect_info']
-    Received:    ['no_resolution', 'unnecessary_escalation', 'incorrect_info']
+    Expected: ['incorrect_info', 'unnecessary_escalation']
+    Received:    ['no_resolution', 'incorrect_info', 'unnecessary_escalation']
 [chat_0026] Intent error: expected 'technical_errors', got 'other'
 [chat_0027] Satisfaction error: expected 'neutral', got 'satisfied'
 [chat_0030] Mistakes mismatch (Jaccard: 33.3%):
@@ -39,18 +39,18 @@ DETAILED MISMATCH REPORT (Discrepancies):
     Received:    ['ignored_question', 'no_resolution', 'unnecessary_escalation']
 [chat_0033] Satisfaction error: expected 'neutral', got 'satisfied'
 [chat_0034] Mistakes mismatch (Jaccard: 50.0%):
-    Expected: ['unnecessary_escalation', 'incorrect_info']
+    Expected: ['incorrect_info', 'unnecessary_escalation']
     Received:    ['unnecessary_escalation']
 [chat_0036] Mistakes mismatch (Jaccard: 50.0%):
-    Expected: ['unnecessary_escalation', 'rude_tone']
-    Received:    ['ignored_question', 'no_resolution', 'unnecessary_escalation', 'rude_tone']
+    Expected: ['rude_tone', 'unnecessary_escalation']
+    Received:    ['ignored_question', 'no_resolution', 'rude_tone', 'unnecessary_escalation']
 [chat_0038] Mistakes mismatch (Jaccard: 0.0%):
     Expected: ['no_resolution', 'unnecessary_escalation']
     Received:    []
 [chat_0039] Satisfaction error: expected 'neutral', got 'unsatisfied'
 [chat_0040] Mistakes mismatch (Jaccard: 50.0%):
     Expected: ['unnecessary_escalation']
-    Received:    ['unnecessary_escalation', 'rude_tone']
+    Received:    ['rude_tone', 'unnecessary_escalation']
 [chat_0042] Intent error: expected 'other', got 'tariff_questions'
 [chat_0042] Mistakes mismatch (Jaccard: 50.0%):
     Expected: ['ignored_question']
@@ -62,10 +62,10 @@ DETAILED MISMATCH REPORT (Discrepancies):
 [chat_0048] Intent error: expected 'other', got 'technical_errors'
 [chat_0048] Mistakes mismatch (Jaccard: 66.7%):
     Expected: ['no_resolution', 'rude_tone']
-    Received:    ['no_resolution', 'incorrect_info', 'rude_tone']
+    Received:    ['no_resolution', 'rude_tone', 'incorrect_info']
 [chat_0050] Mistakes mismatch (Jaccard: 66.7%):
-    Expected: ['unnecessary_escalation', 'rude_tone']
-    Received:    ['no_resolution', 'unnecessary_escalation', 'rude_tone']
+    Expected: ['rude_tone', 'unnecessary_escalation']
+    Received:    ['no_resolution', 'rude_tone', 'unnecessary_escalation']
 [chat_0051] Satisfaction error: expected 'neutral', got 'satisfied'
 [chat_0052] Mistakes mismatch (Jaccard: 50.0%):
     Expected: ['ignored_question']
@@ -87,15 +87,15 @@ DETAILED MISMATCH REPORT (Discrepancies):
     Received:    ['no_resolution', 'rude_tone']
 [chat_0068] Mistakes mismatch (Jaccard: 33.3%):
     Expected: ['no_resolution', 'incorrect_info']
-    Received:    ['incorrect_info', 'rude_tone']
+    Received:    ['rude_tone', 'incorrect_info']
 [chat_0070] Mistakes mismatch (Jaccard: 25.0%):
     Expected: ['no_resolution', 'unnecessary_escalation']
-    Received:    ['ignored_question', 'unnecessary_escalation', 'rude_tone']
+    Received:    ['ignored_question', 'rude_tone', 'unnecessary_escalation']
 [chat_0072] Mistakes mismatch (Jaccard: 50.0%):
     Expected: ['ignored_question', 'no_resolution']
     Received:    ['ignored_question']
 [chat_0074] Mistakes mismatch (Jaccard: 0.0%):
-    Expected: ['unnecessary_escalation', 'incorrect_info']
+    Expected: ['incorrect_info', 'unnecessary_escalation']
     Received:    ['ignored_question', 'no_resolution', 'rude_tone']
 [chat_0075] Intent error: expected 'account_access', got 'technical_errors'
 [chat_0075] Satisfaction error: expected 'neutral', got 'unsatisfied'
@@ -122,14 +122,14 @@ DETAILED MISMATCH REPORT (Discrepancies):
     Received:    ['ignored_question', 'no_resolution', 'incorrect_info']
 [chat_0093] Satisfaction error: expected 'neutral', got 'satisfied'
 [chat_0094] Mistakes mismatch (Jaccard: 50.0%):
-    Expected: ['incorrect_info', 'rude_tone']
+    Expected: ['rude_tone', 'incorrect_info']
     Received:    ['rude_tone']
 [chat_0098] Mistakes mismatch (Jaccard: 50.0%):
     Expected: ['no_resolution']
     Received:    ['ignored_question', 'no_resolution']
 [chat_0099] Satisfaction error: expected 'neutral', got 'unsatisfied'
 [chat_0100] Mistakes mismatch (Jaccard: 25.0%):
-    Expected: ['unnecessary_escalation', 'rude_tone']
+    Expected: ['rude_tone', 'unnecessary_escalation']
     Received:    ['ignored_question', 'no_resolution', 'rude_tone']
 
 =================================================================
