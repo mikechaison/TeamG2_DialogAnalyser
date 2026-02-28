@@ -1,5 +1,7 @@
 # Customer Support Chat Generator and Analyzer
 
+![Overall schema](image_2026-02-28_23-56-42.png)
+
 This project is a pipeline for generating and automatically evaluating synthetic customer support dialogues. It uses the `gemini-3.0-flash-preview` model. To optimize performance and cost, the generation phase uses a `low` thinking level, while the analysis phase uses a `medium` thinking level. The default dataset size is 100 dialogues, which can be modified in the `config.py` file.
 
 ## Project Structure
