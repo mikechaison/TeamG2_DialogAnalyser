@@ -1,7 +1,5 @@
-import os
 import json
 import random
-import time
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
@@ -14,30 +12,70 @@ load_dotenv()
 client = genai.Client()
 
 
-# ==========================================
-
 def generate_random_config() -> dict:
-    """Randomly selects ALL parameters for the chat scenario, including persona."""
-    intent = random.choice(list(config.Intent)).value
-    scenario = random.choice(list(config.CaseScenario)).value
-    satisfaction = random.choice(list(config.Satisfaction)).value
+    """Selects parameters for the chat scenario using logical dependencies to avoid conflicts."""
 
+    # 1. Вибираємо базовий сценарій (Він диктує рівень задоволеності, помилки та початковий тон)
+    scenario = random.choice(list(config.CaseScenario)).value
     mistakes = []
-    if scenario in [config.CaseScenario.AGENT_MISTAKE.value, config.CaseScenario.CONFLICT.value,
-                    config.CaseScenario.PROBLEMATIC.value]:
+
+    if scenario == config.CaseScenario.SUCCESSFUL.value:
+        satisfaction = config.Satisfaction.SATISFIED.value
+        tone_choices = ["polite", "confused", "rushed"]  # Конфліктних емоцій на старті немає
+
+    elif scenario == config.CaseScenario.PROBLEMATIC.value:
+        satisfaction = random.choice([config.Satisfaction.NEUTRAL.value, config.Satisfaction.UNSATISFIED.value])
+        tone_choices = ["polite", "anxious/panicked", "frustrated", "confused"]
+
+    elif scenario == config.CaseScenario.CONFLICT.value:
+        satisfaction = config.Satisfaction.UNSATISFIED.value
+        tone_choices = ["frustrated", "passive-aggressive", "anxious/panicked"]
+
+    else:  # AGENT_MISTAKE
+        satisfaction = config.Satisfaction.UNSATISFIED.value
+        tone_choices = config.CLIENT_TONES  # Клієнт може починати будь-як, проблему створить агент
         num_mistakes = random.randint(1, 2)
         mistakes = [m.value for m in random.sample(list(config.AgentMistake), k=num_mistakes)]
+
+    tone = random.choice(tone_choices)
+
+    # 2. Вибираємо намір (Він диктує терміновість)
+    intent = random.choice(list(config.Intent)).value
+
+    if intent == config.Intent.ACCOUNT_ACCESS.value:
+        urgency = random.choice(["high (blocking work/life)", "critical (losing money/time)"])
+    elif intent == config.Intent.TARIFF_QUESTIONS.value:
+        urgency = random.choice(["low (just asking)", "medium (needs it soon)"])
+    else:
+        urgency = random.choice(config.URGENCY_LEVELS)
+
+    # 3. Вибираємо професію (Вона диктує технічну грамотність)
+    profession = random.choice(config.CLIENT_PROFESSIONS)
+
+    tech_roles = ["software engineer", "data scientist", "QA tester", "system administrator", "UX/UI designer",
+                  "crypto trader"]
+    manual_roles = ["construction worker", "mechanic", "farmer", "truck driver", "chef", "plumber", "retired"]
+
+    if profession in tech_roles:
+        tech_savviness = random.choice(["high (experienced user)", "expert (developer/IT)"])
+    elif profession in manual_roles:
+        tech_savviness = random.choice(["low (struggles with basic UI)", "medium (knows basics)"])
+    else:
+        tech_savviness = random.choice(config.TECH_SAVVINESS)
+
+    # 4. Вік вибираємо випадково (він не створює жорстких логічних конфліктів)
+    age = random.choice(config.CLIENT_AGES)
 
     return {
         "intent": intent,
         "scenario": scenario,
         "satisfaction": satisfaction,
         "agent_mistakes": mistakes,
-        "age": random.choice(config.CLIENT_AGES),
-        "profession": random.choice(config.CLIENT_PROFESSIONS),
-        "tech_savviness": random.choice(config.TECH_SAVVINESS),
-        "tone": random.choice(config.CLIENT_TONES),
-        "urgency": random.choice(config.URGENCY_LEVELS)
+        "age": age,
+        "profession": profession,
+        "tech_savviness": tech_savviness,
+        "tone": tone,
+        "urgency": urgency
     }
 
 
@@ -65,7 +103,7 @@ def get_orchestrator_instructions(chat_config: dict) -> dict:
             response_mime_type="application/json",
             response_schema=models.OrchestratorOutput,
             temperature=config.GENERATION_TEMP,
-            thinking_config={"thinking_level": config.THINKING_LEVEL}
+            thinking_config={"thinking_level": config.GEN_THINKING_LEVEL}
         )
     )
 
@@ -73,19 +111,16 @@ def get_orchestrator_instructions(chat_config: dict) -> dict:
 
 
 def simulate_chat(instructions: dict) -> list:
-    """Запускає цикл спілкування (Ping-Pong Loop) між агентами через новий SDK."""
+    """Запускає цикл спілкування з підтримкою розділення на окремі повідомлення ([ENTER])."""
 
-    # Створюємо сесію чату для агента-клієнта
     client_chat = client.chats.create(
         model=config.GENERATION_MODEL,
         config=types.GenerateContentConfig(
             system_instruction=instructions["client_prompt"],
-            temperature=config.GENERATION_TEMP,
-            thinking_config={"thinking_level": config.THINKING_LEVEL}
+            temperature=config.GENERATION_TEMP
         )
     )
 
-    # Створюємо сесію чату для агента-сапорта
     support_chat = client.chats.create(
         model=config.GENERATION_MODEL,
         config=types.GenerateContentConfig(
@@ -96,29 +131,50 @@ def simulate_chat(instructions: dict) -> list:
 
     transcript = []
 
-    # 1. The Client sends the first message
+    # 1. Перше повідомлення Клієнта (Оркестратор теж може згенерувати його з [ENTER])
     current_input = instructions["first_message_hint"]
-    transcript.append({"role": "client", "text": current_input})
+
+    # Розбиваємо перше повідомлення
+    for msg in current_input.split("[ENTER]"):
+        clean_msg = msg.strip()
+        if clean_msg:
+            transcript.append({"role": "client", "text": clean_msg})
 
     for turn in range(config.MAX_CHAT_TURNS):
-        # 2. Support Agent replies
+        # 2. Відповідь Сапорта
         support_response = support_chat.send_message(current_input)
-        transcript.append({"role": "support", "text": support_response.text})
+
+        # Розбиваємо відповідь сапорта на окремі бабли
+        support_messages = support_response.text.split("[ENTER]")
+        for msg in support_messages:
+            clean_msg = msg.strip()
+            if clean_msg:
+                transcript.append({"role": "support", "text": clean_msg})
+
+        # Передаємо клієнту оригінальний текст з [ENTER], щоб він розумів контекст "паузи"
         current_input = support_response.text
 
-        # 3. Client Agent replies
+        # 3. Відповідь Клієнта
         client_response = client_chat.send_message(current_input)
         client_text = client_response.text
 
-        # Check for the stopping criterion provided by the Orchestrator
+        is_end = False
         if "[END_CHAT]" in client_text:
-            clean_text = client_text.replace("[END_CHAT]", "").strip()
-            if clean_text:
-                transcript.append({"role": "client", "text": clean_text})
-            break
+            is_end = True
+            # Вирізаємо маркер завершення перед розбиттям
+            client_text = client_text.replace("[END_CHAT]", "").strip()
 
-        transcript.append({"role": "client", "text": client_text})
+        # Розбиваємо відповідь клієнта на окремі бабли
+        client_messages = client_text.split("[ENTER]")
+        for msg in client_messages:
+            clean_msg = msg.strip()
+            if clean_msg:
+                transcript.append({"role": "client", "text": clean_msg})
+
         current_input = client_text
+
+        if is_end:
+            break
 
     return transcript
 

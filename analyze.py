@@ -37,7 +37,7 @@ def analyze_chat(transcript_text: str) -> dict:
             temperature=config.ANALYSIS_TEMP,
             response_mime_type="application/json",
             response_schema=models.AnalysisOutput,
-            thinking_config={"thinking_level": config.THINKING_LEVEL}
+            thinking_config={"thinking_level": config.ANALYZE_THINKING_LEVEL}
         )
     )
 

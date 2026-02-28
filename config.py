@@ -62,10 +62,11 @@ GENERATION_TEMP = 0.8
 ANALYSIS_MODEL = "gemini-3-flash-preview"
 ANALYSIS_TEMP = 0.1
 
-THINKING_LEVEL = "low"
+GEN_THINKING_LEVEL = "low"
+ANALYZE_THINKING_LEVEL = "medium"
 
 # Number of messages per generated chat (approximate)
 MAX_CHAT_TURNS = 5
 
 # Number of conversations to generate for the dataset
-DATASET_SIZE = 50
+DATASET_SIZE = 20
