@@ -4,12 +4,12 @@ import enum
 
 class Intent(str, enum.Enum):
     """Categories of customer requests based on task requirements."""
-    PAYMENT_ISSUES = "payment_issues"         # проблеми з оплатою
-    TECHNICAL_ERRORS = "technical_errors"     # технічні помилки
-    ACCOUNT_ACCESS = "account_access"         # доступ до акаунту
-    TARIFF_QUESTIONS = "tariff_questions"     # питання по тарифу
-    REFUNDS = "refunds"                       # повернення коштів
-    OTHER = "other"                           # інше
+    PAYMENT_ISSUES = "payment_issues"         # payment problems
+    TECHNICAL_ERRORS = "technical_errors"     # technical errors
+    ACCOUNT_ACCESS = "account_access"         # account access
+    TARIFF_QUESTIONS = "tariff_questions"     # tariff / plan questions
+    REFUNDS = "refunds"                       # refunds
+    OTHER = "other"                           # other
 
 class Satisfaction(str, enum.Enum):
     """Client satisfaction levels."""
@@ -27,10 +27,10 @@ class AgentMistake(str, enum.Enum):
 
 class CaseScenario(str, enum.Enum):
     """Types of scenarios for dataset generation."""
-    SUCCESSFUL = "successful"                 # успішні кейси
-    PROBLEMATIC = "problematic"               # проблемні кейси
-    CONFLICT = "conflict"                     # конфліктні кейси
-    AGENT_MISTAKE = "agent_mistake"           # випадки з помилками агента
+    SUCCESSFUL = "successful"                 # successful cases
+    PROBLEMATIC = "problematic"               # problematic cases
+    CONFLICT = "conflict"                     # conflict cases
+    AGENT_MISTAKE = "agent_mistake"           # cases with agent mistakes
 
 CLIENT_AGES = ["18-24", "25-34", "35-44", "45-60", "60+"]
 CLIENT_PROFESSIONS = [
@@ -62,10 +62,11 @@ GENERATION_TEMP = 0.8
 ANALYSIS_MODEL = "gemini-3-flash-preview"
 ANALYSIS_TEMP = 0.1
 
-THINKING_LEVEL = "low"
+GEN_THINKING_LEVEL = "low"
+ANALYZE_THINKING_LEVEL = "medium"
 
 # Number of messages per generated chat (approximate)
 MAX_CHAT_TURNS = 5
 
 # Number of conversations to generate for the dataset
-DATASET_SIZE = 50
+DATASET_SIZE = 100
