@@ -2,32 +2,33 @@
     {
         "id": "chat_0001",
         "analysis": {
-            "reasoning": "* Client reports account access issue with 'invalid token' error. * Agent provides generic troubleshooting and immediately states no further help is possible if it fails. * Client asks for clarification on technical terms ('clear your cache') and reports the issue persists on a different computer. * Agent fails to respond to the client's follow-up questions or the new information provided. * Agent concludes the interaction prematurely without exploring escalation or manual resets. * Client ends the chat in distress with the issue unresolved.",
-            "intent": "account_access",
-            "satisfaction": "unsatisfied",
-            "quality_score": 1,
-            "agent_mistakes": [
-                "ignored_question",
-                "no_resolution"
-            ]
-        }
-    },
-    {
-        "id": "chat_0002",
-        "analysis": {
-            "reasoning": "* Client reported a 403 Forbidden error on the /v2/assets/upload endpoint while using a custom Node.js middleware.\n* Agent initially suggested standard troubleshooting (re-authentication, storage limits).\n* After the client provided more technical context, the agent correctly identified two specific technical issues: the manual 'Content-Type' header stripping the boundary parameter and a potential 'Origin' header mismatch in the developer whitelist.\n* The client implemented these specific fixes, which resolved the issue (201 Created).\n* The client expressed high satisfaction and relief due to a tight deadline.",
-            "intent": "technical_errors",
+            "reasoning": "- Client contacted support regarding an account lock due to a declined payment.\n- Agent provided clear, step-by-step instructions to update the payment method.\n- Agent monitored the transaction status in real-time and confirmed the successful processing.\n- Agent instructed the client on how to refresh the session to regain access.\n- Client confirmed the inventory lists were accessible and expressed relief and gratitude.\n- No agent mistakes were identified; the interaction was efficient and professional.",
+            "intent": "payment_issues",
             "satisfaction": "satisfied",
             "quality_score": 5,
             "agent_mistakes": []
         }
     },
     {
+        "id": "chat_0002",
+        "analysis": {
+            "reasoning": "- Client reported a technical issue (greyed-out button) and asked a specific question about offline usage. - Agent responded with extreme hostility and insults. - Agent ignored the question about WiFi. - Agent provided a solution (email verification) that the client claimed was not in their inbox. - Client ended the chat frustrated and without a resolution. - Satisfaction is 'unsatisfied' due to unresolved issue and abusive tone.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
         "id": "chat_0003",
         "analysis": {
-            "reasoning": "- Client contacted support because they were locked out of their account due to a broken 2FA device.\n- Agent correctly identified the intent as account access and explained that manual 2FA bypass is not possible due to security protocols.\n- Agent provided the only two available solutions: using a Recovery Key or starting the Identity Verification flow (24-48 hours).\n- Agent maintained a highly professional, empathetic, and patient tone despite the client's increasing hostility and pressure.\n- The client's dissatisfaction stems from the mandatory security waiting period, which is a system/policy limitation, not an agent error.\n- The agent followed all protocols and attempted to assist with the only remaining path to recovery.",
+            "reasoning": "* Client reports inability to access account due to MFA code being sent to an old phone number.\n* Agent correctly identifies the issue as account access/MFA recovery.\n* Agent provides the specific solution: Manual Identity Verification via ID upload.\n* Agent maintains a professional and empathetic tone.\n* Client confirms understanding, expresses gratitude, and initiates the suggested process.\n* No agent mistakes identified; the interaction followed standard security protocols for credential recovery.",
             "intent": "account_access",
-            "satisfaction": "unsatisfied",
+            "satisfaction": "satisfied",
             "quality_score": 5,
             "agent_mistakes": []
         }
@@ -35,59 +36,59 @@
     {
         "id": "chat_0004",
         "analysis": {
-            "reasoning": "* Client inquired about pricing and coverage for heavy-duty trucks within existing plans.\n* Agent provided specific pricing for Basic ($49) and Pro ($89) plans.\n* Agent clarified that heavy-duty coverage requires a $30 add-on to the Pro plan.\n* Client confirmed understanding of the costs and stated they had the necessary information.\n* Interaction ended positively with the client's core need fulfilled.",
+            "reasoning": "• Client contacted regarding a price increase from $550 to $899 and module availability. • Agent claimed the $899 was a 'temporary authorization hold' and that the website's new pricing was due to 'system maintenance.' • Client correctly identified that authorization holds are not typically 160% of the actual price and that the website appeared fully functional. • Agent failed to provide a logical explanation for the specific price jump, instead repeating a script that contradicted the client's evidence. • Client ended the chat frustrated and unresolved, stating they would contact their bank to block the transaction. • The agent's information regarding the billing hold and website status appears fundamentally flawed or misleading.",
             "intent": "tariff_questions",
-            "satisfaction": "satisfied",
-            "quality_score": 5,
-            "agent_mistakes": []
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "incorrect_info"
+            ]
         }
     },
     {
         "id": "chat_0005",
         "analysis": {
-            "reasoning": "- Client asked two specific questions: burst limits for /v2/sync and physical data residency for GDPR.\n- Agent provided a generic, scripted response about a global 5000/min rate limit and ignored the data residency question entirely.\n- Client pointed out the discrepancy between the agent's info and the API headers/docs, and reiterated the residency question.\n- Agent repeated the same generic script, again ignoring the residency question and dismissing the client's evidence regarding headers.\n- Client expressed frustration and terminated the interaction because their questions remained unanswered and the info provided was contradictory.",
-            "intent": "other",
+            "reasoning": "- Client contacted support to request a refund for a $1,200 charge, claiming the subscription was cancelled months ago.\n- Agent investigated and found the cancellation process was started but not completed by the user.\n- Agent denied the refund citing a 14-day grace period policy and offered a discount or free add-on instead.\n- Client expressed extreme dissatisfaction, labeling the UI as deceptive and the charge as fraudulent.\n- Client terminated the interaction to pursue a bank dispute and legal counsel.\n- No agent mistakes were identified as the agent followed protocol, checked logs, and provided a clear explanation of policy.",
+            "intent": "refunds",
             "satisfaction": "unsatisfied",
-            "quality_score": 1,
-            "agent_mistakes": [
-                "ignored_question",
-                "incorrect_info",
-                "no_resolution"
-            ]
+            "quality_score": 3,
+            "agent_mistakes": []
         }
     },
     {
         "id": "chat_0006",
         "analysis": {
-            "reasoning": "• Client inquired about the Studio plan details, storage capacity, and pricing due to difficulty reading the website.\n• Agent provided a comprehensive breakdown of both Studio and Pro plans, including storage (GB vs TB) and pricing (monthly vs annual).\n• Agent used empathetic language and clear formatting to address the client's stated difficulty with small text and feeling overwhelmed.\n• Agent correctly calculated the storage ratio (20x) and confirmed the final annual prices.\n• Client explicitly confirmed understanding and expressed high satisfaction with the service.",
-            "intent": "tariff_questions",
+            "reasoning": "- Client inquired about the specific data retention timeline after account deletion.\n- Agent responded with extreme hostility, calling the client's inquiry 'pathetic' and 'trivial'.\n- Agent explicitly refused to provide the requested timeline or information.\n- Client's core question remained unanswered.\n- Client expressed confusion and apologized for bothering the agent before leaving.\n- Despite the client's polite closing, the interaction was a total failure due to abuse and lack of resolution.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0007",
+        "analysis": {
+            "reasoning": "- Client reported a 402 error during subscription payment despite bank authorization.\n- Agent correctly identified a gateway synchronization issue.\n- Agent performed a manual re-synchronization and cleared the stuck transaction state.\n- Client confirmed the fix via network logs (200 OK) and successful instance provisioning.\n- Resolution was achieved within the client's urgent 20-minute deadline.",
+            "intent": "payment_issues",
             "satisfaction": "satisfied",
             "quality_score": 5,
             "agent_mistakes": []
         }
     },
     {
-        "id": "chat_0007",
-        "analysis": {
-            "reasoning": "- Client requested a simple UI adjustment (larger buttons) to improve visibility.\n- Agent responded with excessive, jargon-heavy language that confused the client.\n- Agent failed to provide immediate troubleshooting or simple workarounds (e.g., browser zoom or accessibility settings).\n- Agent unnecessarily escalated a basic 'how-to' query to senior engineering staff with a 3-5 day wait time.\n- Client expressed frustration with the complexity and abandoned the service entirely.\n- The interaction resulted in a total loss of the customer due to poor communication and lack of resolution.",
-            "intent": "other",
-            "satisfaction": "unsatisfied",
-            "quality_score": 1,
-            "agent_mistakes": [
-                "unnecessary_escalation",
-                "no_resolution",
-                "rude_tone"
-            ]
-        }
-    },
-    {
         "id": "chat_0008",
         "analysis": {
-            "reasoning": "- Client inquired about a 20% price increase and the location of the pricing tiers page.\n- Agent provided the information but used extremely hostile, condescending, and unprofessional language.\n- Agent insulted the client's competence and accused them of wasting time.\n- Client explicitly stated the service was poor and the tone was inappropriate.\n- Despite the client saying 'thank you' for the minimal explanation, the overall interaction was a failure due to the agent's behavior.",
-            "intent": "tariff_questions",
+            "reasoning": "- Client reported a 502 error on a production dashboard and provided a specific trace ID.\n- Agent provided fundamentally incorrect technical information, claiming 502 errors are only caused by local cache or ISP issues.\n- Agent refused to investigate the trace ID or escalate the issue to the engineering team.\n- Agent gave nonsensical advice about waiting 24 hours for the 'internet to sync'.\n- Client explicitly corrected the agent and terminated the session due to the lack of resolution and poor technical support.",
+            "intent": "technical_errors",
             "satisfaction": "unsatisfied",
             "quality_score": 1,
             "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution",
                 "rude_tone"
             ]
         }
@@ -95,9 +96,9 @@
     {
         "id": "chat_0009",
         "analysis": {
-            "reasoning": "* Client requested highly specific technical security details (AES-256 implementation, key rotation, multi-tenant isolation) for a FIPS 140-2 compliance audit.\n* Agent professionally explained that these details are proprietary and governed by internal frameworks.\n* Agent provided the correct protocol for accessing such information (Enterprise MSA) and offered the SOC-2 Type II summary as an alternative.\n* Client explicitly stated the information was insufficient for their needs and that they would seek alternative solutions.\n* Although the client was polite, the core need was not met, leading to an 'unsatisfied' classification.\n* No agent mistakes were identified as the agent followed corporate security policy and provided clear, professional guidance on how to proceed.",
-            "intent": "other",
-            "satisfaction": "unsatisfied",
+            "reasoning": "Client contacted support due to a 2FA lockout (account_access). The agent correctly identified the issue and explained the mandatory 24-hour security reset protocol. The agent performed identity verification through security questions. Once verified, the agent initiated the reset and clearly communicated the timeline. Although the client was unhappy about the delay due to personal urgency, they accepted the solution and thanked the agent. The agent followed all protocols perfectly.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
             "quality_score": 5,
             "agent_mistakes": []
         }
@@ -105,76 +106,61 @@
     {
         "id": "chat_0010",
         "analysis": {
-            "reasoning": "* Client reported a generic Error 500 during photo uploads, which is a server-side malfunction.\n* Agent diagnosed the issue as a backend synchronization failure requiring Tier 3 Engineering intervention.\n* Agent provided a 48-hour resolution window, which directly conflicted with the client's 2-hour deadline.\n* Client expressed clear frustration and sarcasm, eventually abandoning the platform to find another solution.\n* Although the agent followed protocol for a system-level bug, the core need was not met, leading to hidden dissatisfaction.\n* No agent mistakes were flagged because the agent correctly identified a system limitation and followed escalation procedures as defined.",
-            "intent": "technical_errors",
+            "reasoning": "• Client inquired about specific technical limits (API/Websockets) for the Pro Coach tier. • Agent acknowledged the request but refused to provide the data, citing internal policy. • Agent attempted to escalate the query to a Technical Account Manager for a consultation. • Client expressed significant frustration, labeling the refusal as 'gatekeeping' and 'state secrets'. • Client explicitly rejected the escalation and ended the chat with heavy sarcasm. • Satisfaction is 'unsatisfied' due to the core inquiry remaining unanswered and the client's negative sentiment. • Agent mistake 'unnecessary_escalation' is flagged because the agent admitted to having access to the internal documentation but refused to provide basic numerical limits, forcing a sales-oriented escalation instead.",
+            "intent": "tariff_questions",
             "satisfaction": "unsatisfied",
-            "quality_score": 3,
-            "agent_mistakes": []
+            "quality_score": 2,
+            "agent_mistakes": [
+                "unnecessary_escalation"
+            ]
         }
     },
     {
         "id": "chat_0011",
         "analysis": {
-            "reasoning": "- Client reported a 422 error on the /metrics endpoint for large payloads.\n- Agent correctly identified the issue as a 5MB request size limit.\n- Agent provided a clear solution: use the /batch endpoint or chunk the data.\n- Client confirmed the /batch endpoint resolved the issue for 50k rows.\n- Interaction was efficient, accurate, and resulted in full resolution.",
-            "intent": "technical_errors",
-            "satisfaction": "satisfied",
-            "quality_score": 5,
+            "reasoning": "• Client requested a refund for an accidental annual subscription charge of $450. • Agent denied the refund citing a 24-hour grace period policy. • Agent attempted to reframe the situation by highlighting the 20% savings of the annual plan. • Client expressed significant financial distress and frustration with the app's UI. • Client labeled the service a scam and terminated the interaction. • Agent followed company policy and maintained a professional tone, but the core issue remained unresolved for the client.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 4,
             "agent_mistakes": []
         }
     },
     {
         "id": "chat_0012",
         "analysis": {
-            "reasoning": "• Client contacted regarding a rejected payment and security concerns. • Agent provided reassurance, explained the role of Stripe, and requested the last 4 digits for investigation. • Client became highly agitated, demanded legal guarantees and certificates, and refused to provide the requested info. • Client terminated the interaction and the business relationship before the agent could respond to the specific documentation request. • No agent mistakes identified as the client abandoned the chat.",
-            "intent": "payment_issues",
+            "reasoning": "- Client asked two distinct questions: the location of the data export button and the availability of an API for a 'delete my data' button.\n- Agent provided a detailed, professional response regarding the data export process.\n- Agent completely ignored the second question regarding the API functionality.\n- Client expressed significant frustration with the platform's user interface, calling it a 'nightmare' and 'overwhelming'.\n- Although the client thanked the agent for the export info, the interaction ended with an unaddressed query and high user stress.",
+            "intent": "other",
             "satisfaction": "unsatisfied",
-            "quality_score": 5,
-            "agent_mistakes": []
+            "quality_score": 2,
+            "agent_mistakes": [
+                "ignored_question"
+            ]
         }
     },
     {
         "id": "chat_0013",
         "analysis": {
-            "reasoning": "The client requested two things: a refund for a double charge and a VAT invoice for the first charge. The agent successfully processed the refund but completely ignored the request for the VAT invoice. The client explicitly stated that the invoice was the most important part and expressed frustration before ending the chat because their needs were not fully met. This constitutes an ignored question and a failure to provide a full resolution.",
+            "reasoning": "- Client reported a 402 error during subscription renewal despite valid payment methods.\n- Agent identified a backend synchronization issue with the payment processor and manually triggered a refresh.\n- Client confirmed the transaction was successful and the workspace was provisioned.\n- Client expressed high satisfaction and gratitude for the quick resolution.\n- Agent demonstrated technical proficiency and empathy without any mistakes.",
             "intent": "payment_issues",
-            "satisfaction": "unsatisfied",
-            "quality_score": 2,
-            "agent_mistakes": [
-                "ignored_question",
-                "no_resolution"
-            ]
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
         }
     },
     {
         "id": "chat_0014",
         "analysis": {
-            "reasoning": "- Client inquired about Enterprise tier technical specifications and storage pricing.\n- Agent provided highly restrictive throughput limits (7 RPM) and exorbitant storage costs ($250/GB) that the client deemed non-viable.\n- Agent used a condescending tone by suggesting the client 'reconsider project scope' to align with 'standard digital practices'.\n- Agent prematurely terminated the interaction without offering an escalation to a sales representative or technical specialist despite the high-value nature of an Enterprise inquiry.\n- Client explicitly stated they would seek an alternative provider.",
+            "reasoning": "- Client contacted support because the 'Export to PDF' button disappeared.\n- Agent explained the feature was moved from the Standard plan to the Premium enterprise tier due to a policy update.\n- Client expressed high distress, stating they are a small business and cannot afford the upgrade.\n- The core need (exporting reports) remains unfulfilled.\n- Satisfaction is 'unsatisfied' because the client's workflow is broken and the proposed solution is financially inaccessible.\n- No agent mistakes were identified as the agent correctly informed the client of the policy change and confirmed no technical error occurred.",
             "intent": "tariff_questions",
             "satisfaction": "unsatisfied",
-            "quality_score": 1,
-            "agent_mistakes": [
-                "rude_tone",
-                "no_resolution"
-            ]
+            "quality_score": 4,
+            "agent_mistakes": []
         }
     },
     {
         "id": "chat_0015",
         "analysis": {
-            "reasoning": "• Client sought clarification on Elite Pro pricing ($199) and feature inclusions.\n• Agent provided pricing ($299 + $50 add-on) that directly contradicted the website's 'all-inclusive' $199 offer.\n• Agent failed to explain the discrepancy or provide any documentation, citing a system update.\n• Agent offered no workaround, follow-up, or escalation despite the client's urgent budget deadline.\n• Client abandoned the service due to the unresolved conflict and lack of official confirmation.",
-            "intent": "tariff_questions",
-            "satisfaction": "unsatisfied",
-            "quality_score": 1,
-            "agent_mistakes": [
-                "incorrect_info",
-                "no_resolution"
-            ]
-        }
-    },
-    {
-        "id": "chat_0016",
-        "analysis": {
-            "reasoning": "• Client contacted support because they were locked out of their account due to MFA on a new device.\n• Agent correctly identified the issue and followed security protocols by asking for a security question answer.\n• Agent provided clear, step-by-step instructions tailored to a non-technical user (explaining how to 'refresh' and find the icon).\n• Agent successfully updated the phone number and guided the client through the login process.\n• The issue was fully resolved, and the client expressed high satisfaction and relief.",
+            "reasoning": "- Client contacted support due to 2FA failure and account lockout.\n- Agent expressed empathy and followed security protocols by requesting verification details.\n- Agent successfully verified the client and provided a temporary bypass code.\n- Agent explained the likely cause of the 2FA failure (time synchronization).\n- Client confirmed the code worked and the issue was resolved.",
             "intent": "account_access",
             "satisfaction": "satisfied",
             "quality_score": 5,
@@ -182,29 +168,39 @@
         }
     },
     {
-        "id": "chat_0017",
+        "id": "chat_0016",
         "analysis": {
-            "reasoning": "- Client reported account lockout due to 2FA sync issues and a 500 error on the recovery endpoint.\n- Agent immediately blamed the client's hardware/clock without verification.\n- Agent provided incorrect technical information by claiming a 500 error is 'saturation' (load) rather than a server-side exception.\n- Agent used an extremely rude, condescending, and unprofessional tone ('technical negligence', 'cease demanding urgency').\n- Agent failed to escalate a verified server-side failure or provide a resolution.\n- Client expressed extreme dissatisfaction and intent to close the account due to financial loss and poor support.",
-            "intent": "account_access",
+            "reasoning": "- Client inquired about billing tiers and a price increase.\n- Agent responded with extreme hostility, condescension, and personal insults regarding the client's intelligence.\n- Agent explicitly refused to answer the question, claiming it was too convoluted and they lacked the inclination to help.\n- Agent transferred the client to another department unnecessarily while insulting the client's preparation.\n- Client abandoned the interaction feeling like a burden; the core issue remained completely unresolved.",
+            "intent": "tariff_questions",
             "satisfaction": "unsatisfied",
             "quality_score": 1,
             "agent_mistakes": [
                 "ignored_question",
-                "incorrect_info",
                 "rude_tone",
-                "no_resolution"
+                "no_resolution",
+                "unnecessary_escalation"
             ]
+        }
+    },
+    {
+        "id": "chat_0017",
+        "analysis": {
+            "reasoning": "- Client requested a refund for an accidental annual subscription purchase.\n- Agent immediately processed the refund and adjusted the subscription to monthly.\n- Agent explained the technical 3-5 business day delay for banking transactions.\n- Client remained highly distressed and unsatisfied due to immediate financial need and banking limitations.\n- Agent followed all protocols, provided accurate information, and showed empathy.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
         }
     },
     {
         "id": "chat_0018",
         "analysis": {
-            "reasoning": "- Client inquired about specific statistical anonymization techniques (k-anonymity vs. differential privacy) and requested a whitepaper.\n- Agent provided a technically nonsensical response, conflating transport layer security (SSL) and blockchain with data anonymization models.\n- Agent failed to provide the requested whitepaper, citing rebranding.\n- Client's response is heavily sarcastic, indicating they recognized the agent's technical incompetence.\n- Client implies they will discontinue the service based on this poor interaction.\n- Satisfaction is marked 'unsatisfied' due to the 'hidden dissatisfaction' rule; the client's polite closing masks a complete failure to address the technical query accurately.",
+            "reasoning": "- Client inquired about specific API rate-limiting logic (fixed window vs. token bucket) to optimize retry logic.\n- Agent responded with an extremely verbose, bureaucratic message without providing any technical information.\n- Agent classified standard API documentation details as 'advanced infrastructure' and escalated the ticket unnecessarily.\n- Client expressed that this is standard disclosure and explained the technical necessity for the info.\n- Although the client was polite ('thanks for trying'), the core need was not met, triggering the 'hidden dissatisfaction' rule.\n- Agent failed to resolve the issue directly despite it being a standard technical inquiry for an API support role.",
             "intent": "other",
             "satisfaction": "unsatisfied",
-            "quality_score": 1,
+            "quality_score": 2,
             "agent_mistakes": [
-                "incorrect_info",
+                "unnecessary_escalation",
                 "no_resolution"
             ]
         }
@@ -212,8 +208,8 @@
     {
         "id": "chat_0019",
         "analysis": {
-            "reasoning": "- Client requested assistance with the export tool for a safety inspection.\n- Agent provided detailed, step-by-step instructions for the reporting module.\n- Agent correctly clarified the difference between 'Activity logs' and 'Active Vehicle' logs upon the client's inquiry.\n- Agent maintained a supportive and empathetic tone throughout the high-pressure situation.\n- Client successfully downloaded the correct CSV file and confirmed it met their needs.\n- Interaction concluded with the client expressing high satisfaction.",
-            "intent": "other",
+            "reasoning": "Client contacted regarding a declined payment for a subscription. Agent identified a security flag and requested necessary verification details. Agent manually cleared the block and instructed the client to retry. Payment was successful, and the client regained access to the required documents. Client expressed gratitude and confirmed resolution. No mistakes identified.",
+            "intent": "payment_issues",
             "satisfaction": "satisfied",
             "quality_score": 5,
             "agent_mistakes": []
@@ -222,13 +218,949 @@
     {
         "id": "chat_0020",
         "analysis": {
-            "reasoning": "• Client reported 500 errors and TLS handshake failures specifically in the Singapore region. • Agent claimed the platform does not support HTTPS/TLS for webhooks and recommended downgrading to unencrypted HTTP, which is a significant security risk and likely incorrect information for a modern service provider. • Agent twice ignored the client's specific request for error codes from the outgoing logs. • Agent failed to address the regional nature of the issue. • The interaction ended with the client's issue unresolved and their trust in the platform severely damaged.",
+            "reasoning": "The client reported critical 500 errors affecting production cron jobs. The agent acknowledged the issue but immediately escalated it without providing a workaround or ETA. The agent used a highly robotic, dismissive closing statement to end the interaction while the client was still providing technical details and explaining the financial impact. The agent failed to answer the direct question regarding the API status and ignored all subsequent technical information provided by the client after the initial escalation message.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "no_resolution",
+                "ignored_question"
+            ]
+        }
+    },
+    {
+        "id": "chat_0021",
+        "analysis": {
+            "reasoning": "* Client contacted support due to MFA synchronization issues preventing account access.\n* Agent correctly identified the intent as account_access.\n* Agent provided immediate troubleshooting (app-level sync) and a clear path to a workaround (bypass code).\n* Agent performed necessary security verification (last 4 digits of phone) before providing the bypass.\n* Client confirmed successful login and resolution of the issue.\n* Agent was professional, empathetic to the deadline, and provided clear instructions.\n* No mistakes were made.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0022",
+        "analysis": {
+            "reasoning": "- Client asked two specific questions: one about a 5G data hard cap and one about roaming in Switzerland/Italy. - Agent provided a detailed response regarding roaming but completely ignored the question about the data cap. - Client explicitly pointed out the omission and expressed frustration with the lack of clarity. - Client terminated the interaction stating it was useless and they would look elsewhere. - Core inquiry remained unanswered.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0023",
+        "analysis": {
+            "reasoning": "Client requested refund for $2400 charge citing UI error. Agent denied refund based on Enterprise tier policy. Agent offered non-monetary workarounds like consulting and support. Client rejected offers and expressed extreme frustration regarding job security. Client terminated chat to pursue legal action and chargeback. No agent mistakes identified as agent followed protocol and client ended session before further resolution steps.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 3,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0024",
+        "analysis": {
+            "reasoning": "- Client asks a technical question about API metadata support (XMP vs EXIF).\n- Agent provides likely incorrect/nonsensical information claiming only .txt files are supported for media rights.\n- Agent refuses to provide technical assistance, citing it is out of scope.\n- Agent unnecessarily escalates a technical query to the Legal department with a 3-5 day turnaround, ignoring the client's 2-hour deadline.\n- Client is clearly frustrated and leaves without a resolution.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0025",
+        "analysis": {
+            "reasoning": "- Client reported a payment failure (Error 4002) blocking access to files needed for a deadline.\n- Agent identified the cause as an outdated 3D-Secure protocol and provided clear instructions to delete and re-add the card.\n- Agent maintained an empathetic tone, acknowledging the client's stress and urgency.\n- Agent verified the transaction success on the backend and confirmed the software functionality with the client.\n- Client explicitly confirmed the issue was fully resolved and expressed high satisfaction.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0026",
+        "analysis": {
+            "reasoning": "Client inquired about UI change (missing Gallery icon). Agent responded with extreme hostility, insults, and condescension. Agent identified the new location (Assets tab) but failed to guide the client effectively. Client confirmed they still could not find the section and expressed disappointment. Interaction ended without resolution and with severe professional misconduct.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0027",
+        "analysis": {
+            "reasoning": "* Intent: Client cannot access their shop schedule due to 2FA (SMS code) not arriving.\n* Agent Response 1: Provided a very long, wordy response with multiple troubleshooting steps (signal, DND, resend link, email, backup codes). \n* Client Response: Expressed confusion over 'big words', confirmed resend button was clicked 5 times, and emphasized extreme time pressure.\n* Agent Response 2: Simplified language, explained 'spam filter', and directed client to the 'I do not have my phone' link for security questions.\n* Resolution: Client used security questions to gain access and confirmed they can see the calendar.\n* Satisfaction: Satisfied, as the core need (accessing the schedule) was met before the deadline.\n* Quality: The agent was helpful and empathetic, though the first response was overly verbose for a high-pressure situation. No technical mistakes were made.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0028",
+        "analysis": {
+            "reasoning": "- Client inquired about a $25 price increase and the specific cost of SMS alerts.\n- Agent responded with generic, canned statements regarding market factors and operational costs.\n- Agent repeatedly ignored the direct question about the cost per SMS message despite the client asking three times.\n- Agent failed to provide a specific explanation for the price hike, citing automated billing and a lack of itemized breakdowns.\n- Client expressed high frustration and terminated the chat because they had to work, explicitly stating the issue remained unresolved.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0029",
+        "analysis": {
+            "reasoning": "- Client reports an unauthorized $299 charge after disabling auto-renew.\n- Client provides specific technical evidence (API 200 OK response) proving the cancellation attempt.\n- Agent acknowledges the discrepancy but refuses a refund, citing a 'Global Refund Policy' for digital renewals.\n- Agent offers a one-month credit as a workaround, which the client rejects as insulting given the intent to terminate service.\n- Client identifies the issue as a database/ACID property failure and terminates the chat to file a chargeback and FTC report.\n- Agent failed to escalate or resolve a documented system error, hiding behind policy instead of addressing the technical failure.",
+            "intent": "payment_issues",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0030",
+        "analysis": {
+            "reasoning": "- Client asked two technical questions: API rate limits and webhook support.\n- Agent completely ignored the question regarding webhooks.\n- Agent escalated the rate limit query to engineering with a 3-5 business day turnaround, which is an unnecessary escalation for standard API documentation.\n- Client expressed clear frustration and sarcasm regarding the delay and the ignored question.\n- Client terminated the interaction without any answers, resulting in no resolution.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0031",
+        "analysis": {
+            "reasoning": "- Client contacted support regarding payment card update errors.\n- Intent is clearly payment_issues.\n- Agent provided detailed, step-by-step instructions and clarified technical terms (CVV vs PIN).\n- Agent correctly identified the likely cause of the zip code error (recent move/bank records).\n- Client successfully updated the card and expressed gratitude.\n- Interaction resulted in full resolution with high client satisfaction.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0032",
+        "analysis": {
+            "reasoning": "Client reported a technical error with a grayed-out upload button and asked twice about file size limits. The agent ignored the direct question regarding file size limits. The agent used overly complex, bureaucratic jargon that confused the client. The agent escalated the issue to senior engineering immediately without performing any basic troubleshooting or diagnostic steps. The client ended the interaction frustrated and without a resolution, indicating the issue was not solved.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0033",
+        "analysis": {
+            "reasoning": "Client contacted support due to login failure (account_access). Agent verified identity using ID and phone number. Agent provided a temporary password and clear instructions for reset. Client confirmed successful login and access to documents. Interaction ended with the user's goal achieved. No agent mistakes identified.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0034",
+        "analysis": {
+            "reasoning": "The client contacted support regarding a discrepancy between the advertised price and the actual charge for the Pro plan. The agent identified a 25% fee but immediately claimed a restriction on providing further details, escalating the matter to a senior audit team. Although the client was polite and used 'thank you', they explicitly stated they still did not understand their bill, triggering the 'hidden dissatisfaction' rule. The escalation is classified as unnecessary because a standard pricing explanation should be handled by front-line support without requiring a global audit team.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0035",
+        "analysis": {
+            "reasoning": "- Client charged $500 after a failed cancellation attempt caused by a mobile UI bug.\n- Agent admitted the technical fault (broken media query) but refused a refund citing Terms of Service.\n- Agent offered to cancel the subscription for the next year, which did not address the current financial loss.\n- Client explicitly stated the UI failure prevented them from exercising their rights and threatened a chargeback.\n- Agent failed to resolve the issue or escalate to a supervisor despite acknowledging the company's technical error was the root cause.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0036",
+        "analysis": {
+            "reasoning": "- Client requested GDPR deletion policy for enterprise data.\n- Agent responded with extreme hostility, insulting the client's intelligence and initiative.\n- Agent refused to provide the information, claiming it's not their job to read manuals.\n- Agent performed an unnecessary escalation to a 72-hour queue despite the client's urgency.\n- Client (CEO) expressed extreme dissatisfaction and terminated the chat to escalate to the executive team.\n- Core issue remained completely unresolved.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "rude_tone",
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0037",
+        "analysis": {
+            "reasoning": "- Client contacted regarding payment failures causing ad campaigns to pause.\n- Support agent identified the issue as a gateway-level decline (AVS mismatch) by checking internal logs.\n- Agent correctly diagnosed that a recent office move likely caused a ZIP code mismatch.\n- Client followed the agent's advice to try the old ZIP code, which successfully resolved the issue.\n- Client expressed high satisfaction and relief at the end of the interaction.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0038",
+        "analysis": {
+            "reasoning": "- Client reported a 500 Internal Server Error during CLI key rotation, identifying a potential null pointer in the vault-provider service.\n- Intent is classified as technical_errors due to the systemic malfunction reported.\n- Agent requested the Request ID but immediately stated that backend troubleshooting is out of scope and requires escalation.\n- Agent provided a 5-business-day SLA for the escalation.\n- Client expressed frustration, stating the interaction was a waste of time and the issue is a critical blocker for their deployment.\n- Satisfaction is unsatisfied because the core issue remains unresolved and the client is explicitly unhappy with the resolution path.\n- No agent mistakes are flagged because the agent followed protocol for out-of-scope technical issues and informed the client of the escalation process.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 3,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0039",
+        "analysis": {
+            "reasoning": "- Client reports account lockout due to lost MFA device and inaccessible recovery email.\n- Agent identifies the issue as an account access problem and explains the mandatory security protocol.\n- Agent provides a clear resolution path (Manual Identity Verification) and sets expectations for a 24-48 hour processing window.\n- Client expresses frustration with the timeline but accepts the process.\n- Satisfaction is marked 'unsatisfied' because the client's immediate need (urgent access to blueprints) was not met due to security constraints.\n- Agent performance was optimal, following all security procedures and maintaining a professional tone.",
+            "intent": "account_access",
+            "satisfaction": "unsatisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0040",
+        "analysis": {
+            "reasoning": "Client inquired about specific features and limits of the Pro vs Enterprise tiers for an urgent pitch. The agent acknowledged the request but explicitly refused to provide the information, citing complexity. The agent escalated the ticket to Sales with a 24-48 hour response time, which the client stated was too long for their deadline. The client expressed that the problem was not solved and they would look at other options. The agent failed to provide basic tier specifications that should be accessible in support documentation.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0041",
+        "analysis": {
+            "reasoning": "- Client contacted support to request a refund for an accidental $600 purchase made by a child.\n- Agent denied the refund, citing a corporate policy that activated digital subscriptions are non-refundable.\n- Agent provided helpful preventative advice regarding parental controls and auto-renewal settings.\n- Client expressed extreme financial distress and accused the company of theft.\n- Client terminated the interaction while highly upset.\n- No agent mistakes were identified as the agent followed stated policy and maintained a professional, empathetic tone.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 3,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0042",
+        "analysis": {
+            "reasoning": "- Client asked two questions: how to export logs and the retention policy for 'Archival Tier 3' in v4 migration.\n- Agent provided troubleshooting for the log export but repeatedly ignored the specific question about Tier 3 retention.\n- Agent used canned responses/macros for the v4 migration summary three times, none of which addressed the client's specific concern about data truncation or deprecation.\n- Client explicitly pointed out the ignored question twice.\n- Client eventually gave up and ended the chat because the core issue (data retention policy) was never addressed.\n- Satisfaction is 'unsatisfied' due to the unresolved critical inquiry despite the client's polite closing.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0043",
+        "analysis": {
+            "reasoning": "- Client reported a 402 error during the checkout process for a tier upgrade.\n- Agent identified the root cause as a stale pending transaction state in the backend.\n- Agent manually cleared the state and re-synchronized the payment token.\n- Client verified the fix, confirmed the subscription was active, and expressed high satisfaction.\n- The interaction was efficient, technical, and resulted in a full resolution.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0044",
+        "analysis": {
+            "reasoning": "- Client reported a 503 Service Unavailable error during a time-sensitive gallery upload.\n- Agent provided technically incorrect information by claiming a 503 server error is caused by image color profiles (CMYK).\n- Agent ignored the client's specific question regarding the discrepancy between the site's status page and the actual error.\n- Agent failed to provide a valid resolution or escalate a clear server-side issue.\n- Client ended the interaction frustrated with the issue unresolved.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution",
+                "ignored_question"
+            ]
+        }
+    },
+    {
+        "id": "chat_0045",
+        "analysis": {
+            "reasoning": "- Client contacted support due to MFA codes not arriving via SMS, preventing account access during a critical deadline.\n- Intent is classified as account_access as it involves authentication hurdles.\n- Agent correctly identified the urgency, verified the user's identity, and performed a manual MFA bypass to grant immediate access.\n- Agent explained the technical fix (back-end synchronization) and provided a proactive recommendation (Authenticator App) to prevent future issues.\n- Client confirmed they are 'all set' and have access to their dashboard and files.\n- Satisfaction is satisfied as the core need was met and the deadline was preserved.\n- No agent mistakes identified; the agent was professional, efficient, and empathetic.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0046",
+        "analysis": {
+            "reasoning": "- Client contacted support regarding missing branding features in the Pro plan.\n- Agent responded with extreme hostility, personal insults, and a condescending tone.\n- Agent identified that the feature belongs to a higher tier but failed to offer any constructive resolution, refund, or upgrade path.\n- Client expressed significant emotional distress and left the interaction with the core issue unresolved.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0047",
+        "analysis": {
+            "reasoning": "- Client requested refund for $1200 annual renewal. - Agent refused citing 24-hour policy window. - Agent offered compute credits and future downgrade as workaround. - Client disclosed financial hardship (overdraft) and zero usage telemetry. - Client terminated chat to pursue chargeback before agent could respond to new context. - Core issue unresolved; customer lost.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0048",
+        "analysis": {
+            "reasoning": "- Client reported a persistent technical failure (99% export failure with checksum mismatch) involving legal compliance data.\n- Agent responded with extreme hostility, personal insults, and dismissive language.\n- Agent provided unverified technical claims blaming the user's hardware without investigation.\n- No resolution or troubleshooting was offered; the agent refused to assist.\n- Client terminated the interaction due to the agent's behavior and lack of resolution, indicating intent to escalate legally.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0049",
+        "analysis": {
+            "reasoning": "- Client reported a payment decline error while upgrading to Enterprise tier.\n- Agent identified the issue as an internal security flag and requested specific transaction details.\n- Agent performed a manual override to resolve the block.\n- Client confirmed the upgrade was successful and rate limits were updated.\n- Interaction was efficient, professional, and resulted in a full resolution.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0050",
+        "analysis": {
+            "reasoning": "- Client reported a critical technical failure (blank dashboard) during a high-stakes meeting.\n- Agent responded with extreme hostility and a dismissive tone.\n- Agent explicitly refused to perform basic troubleshooting (logs/cache) despite acknowledging their existence.\n- Agent performed an unnecessary escalation to a slow-response tier as a gatekeeping tactic.\n- Client's sarcastic closing remarks indicate severe dissatisfaction despite the use of the word 'thank you'.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone",
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0051",
+        "analysis": {
+            "reasoning": "• Client reported 2FA lockout after OS update (account_access).\n• Agent correctly identified the cause and provided the Identity Verification Upload (IVU) process.\n• Agent addressed all technical follow-up questions regarding latency, file formats (JPEG vs HEIC), and browser compatibility.\n• Client expressed satisfaction and followed the instructions.\n• No agent mistakes were found; the interaction was professional and technically accurate.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0052",
+        "analysis": {
+            "reasoning": "- Client asks specifically about data caps and throttling on the Pro Plan.\n- Agent ignores the question and provides irrelevant information about billing and payment methods.\n- Client repeats the question, emphasizing the need for a straight answer regarding data limits.\n- Agent ignores the question a second time, providing irrelevant information about loyalty programs and premium support.\n- Client terminates the chat because the core inquiry was never addressed.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0053",
+        "analysis": {
+            "reasoning": "• Client contacted to dispute an unauthorized annual charge and requested a refund. • Agent identified the charge occurred 72 hours prior and cited a strict 24-hour refund policy. • Agent expressed empathy regarding the UI confusion and offered to disable auto-renewal. • Client explicitly rejected the policy, accused the company of predatory tactics, and stated they would dispute the charge with their bank. • The core issue (refund) was not resolved, and the client ended the interaction in a state of high dissatisfaction. • No agent mistakes were recorded as the agent followed company policy and maintained a professional, empathetic tone.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 3,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0054",
+        "analysis": {
+            "reasoning": "• Client requested account and data deletion due to privacy concerns. • Agent provided fundamentally incorrect information regarding GDPR and data retention laws. • Agent claimed deletion is 'impossible' and that records must remain indefinitely, which is a failure to provide a resolution. • Although the client was formally polite and said 'thank you', they explicitly expressed disappointment, worry, and unease. • The core need was not met due to the agent's misinformation.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0055",
+        "analysis": {
+            "reasoning": "- Client contacted support regarding a declined payment and fear of data loss.\n- Agent provided empathetic reassurance and clear, step-by-step instructions to update payment information.\n- Agent proactively monitored the account and verified the transaction success on the backend.\n- Client confirmed the resolution and expressed high satisfaction and relief.\n- No agent mistakes were identified.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0056",
+        "analysis": {
+            "reasoning": "- Client reports a 404 error in the shift swap feature.\n- Agent responds with extreme hostility, insulting the client's intelligence and technical competence.\n- Agent refuses to investigate the issue, claiming it is a user-side error without evidence.\n- Agent explicitly states they will not help and dismisses the client's urgency.\n- Client expresses frustration with the attitude and gives up on the resolution.\n- Core technical issue remains unresolved.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0057",
+        "analysis": {
+            "reasoning": "- Client unable to receive SMS 2FA code for login.\n- Agent verified identity using email and credit card info.\n- Agent provided a bypass code as requested.\n- Client confirmed successful login and resolution of the primary issue (updating water timers).\n- Interaction was efficient and professional.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0058",
+        "analysis": {
+            "reasoning": "- Client asked for a specific numerical limit for lead exports on the Pro plan.\n- Agent provided a verbose, generic response without the requested data.\n- Agent redirected the client to a pricing page the client had already found unhelpful.\n- Client expressed frustration due to time constraints and ended the chat without the information.\n- Agent failed to answer the direct question and did not resolve the inquiry.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0059",
+        "analysis": {
+            "reasoning": "- Client requested refund for accidental $1,200 annual charge. - Agent denied refund citing strict corporate policy regarding active license keys. - Agent offered future billing change and free add-on as a gesture of goodwill. - Client rejected offer and threatened chargeback/legal action. - Agent followed policy and was professional, but the core issue remained unresolved.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0060",
+        "analysis": {
+            "reasoning": "- Client inquired about specific API rate-limiting logic (sliding vs. fixed window) to fix a blocked test suite.\n- Agent acknowledged having access to the internal wiki containing this information but refused to provide it directly.\n- Agent escalated the ticket to engineering despite having the tools to answer the question.\n- Client explicitly stated they were disappointed and remained blocked from working.\n- Interaction ended with the core need unmet and the client expressing dissatisfaction.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0061",
+        "analysis": {
+            "reasoning": "* Client contacted support due to a payment failure ('invalid' error) while trying to renew a subscription.\n* Agent provided comprehensive troubleshooting steps and empathetic communication.\n* Agent correctly identified the specific UI issue (swapped CVV and Zip code fields) and provided a helpful accessibility tip (Ctrl + Plus to zoom).\n* Client successfully processed the payment and expressed high satisfaction and relief.\n* No agent mistakes were identified; the interaction was professional and effective.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0062",
+        "analysis": {
+            "reasoning": "- Client reported 504 errors and asked twice about RAW file integrity.\n- Agent provided a canned response regarding the server outage but completely ignored the specific question about data safety.\n- Client explicitly pointed out that the agent ignored the most important question.\n- Interaction ended with the technical issue unresolved and the client's anxiety about data corruption unaddressed.\n- Satisfaction is unsatisfied due to the ignored inquiry and lack of resolution.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "ignored_question"
+            ]
+        }
+    },
+    {
+        "id": "chat_0063",
+        "analysis": {
+            "reasoning": "• Client contacted support because they cannot access their account due to a broken phone (MFA device) and needs to print a bill for a waiting customer.\n• Intent is clearly account_access.\n• Agent correctly identified that manual identity verification via ID upload is the only secure path forward per company protocol.\n• Agent explained technical terms (MFA, upload) when the client expressed confusion.\n• Agent addressed the lack of a camera by suggesting alternative devices (staff phone, tablet, etc.).\n• Client is forced to leave their business to find help from a neighbor, expressing clear frustration and time loss.\n• While the agent followed protocol and provided the correct resolution path, the client's core need (immediate access) was not met, and they ended the chat in a state of significant inconvenience and dissatisfaction.",
+            "intent": "account_access",
+            "satisfaction": "unsatisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0064",
+        "analysis": {
+            "reasoning": "• Client inquired about technical specifications (API/Websocket limits) for Enterprise vs. Pro tiers.\n• Agent provided highly improbable specs, claiming the Enterprise tier is significantly more restricted (50 RPM) than the Pro tier (5000 RPM).\n• Agent used non-standard, pseudo-technical terminology ('cooling period between packets', 'surgical-grade precision') to justify these limitations.\n• Client correctly identified these specs as unusable for enterprise-grade healthcare infrastructure (HL7/telemetry).\n• Agent doubled down on the illogical information instead of verifying or escalating to a technical resource.\n• Client terminated the interaction stating the service is unusable and does not meet requirements.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0065",
+        "analysis": {
+            "reasoning": "* Client requested a refund due to vehicle damage caused by a navigation error.\n* Agent identified the intent as a refund request.\n* Agent correctly cited the 14-day refund policy and Terms of Service regarding driver responsibility.\n* Agent maintained a professional and empathetic tone despite the high-tension situation.\n* Agent offered a goodwill gesture (1-month extension) which the client rejected.\n* Client remained unsatisfied and terminated the chat, intending to pursue a chargeback.\n* No agent mistakes were identified; the agent followed company policy and protocol perfectly.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0066",
+        "analysis": {
+            "reasoning": "- Client reported 403 errors on the /v2/leads endpoint and inquired about potential breaking changes.\n- Support agent responded with extreme hostility, personal insults, and a dismissive tone.\n- Agent explicitly refused to investigate the issue or provide assistance, citing more pressing tickets.\n- Although the client ended with a polite 'thank you', the core technical issue was never addressed or resolved.\n- This is a clear case of hidden dissatisfaction where the client gave up due to agent abuse.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0067",
+        "analysis": {
+            "reasoning": "- Client reported a billing failure ('security mismatch') causing campaign downtime.\n- Agent correctly identified the issue as a payment processing error and requested verification.\n- Agent provided a direct solution (manual re-authorization bypass) and explained the technical cause.\n- Payment was successfully processed and campaigns were reactivated.\n- Client confirmed resolution and expressed satisfaction with the quick turnaround.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0068",
+        "analysis": {
+            "reasoning": "- Client reported a 502 Bad Gateway error during a time-sensitive payroll export.\n- Agent attributed the error to scheduled maintenance but provided no ETA.\n- Agent repeatedly suggested switching browsers for a server-side 502 error, which is technically incorrect advice.\n- Agent refused to escalate the issue or provide a manual workaround despite the client's urgent banking deadline.\n- Agent used repetitive, scripted responses that failed to address the client's specific technical points.\n- The interaction ended with the client's core issue unresolved and the client expressing extreme frustration.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0069",
+        "analysis": {
+            "reasoning": "* Client reported inability to receive 2FA SMS codes, preventing account access.\n* Agent acknowledged urgency and provided two specific workarounds: using backup codes or manual identity verification via recovery key.\n* Client confirmed finding the backup codes and is proceeding to use them.\n* The agent's guidance directly led to a resolution path for the client's immediate need.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0070",
+        "analysis": {
+            "reasoning": "• Client inquired about pricing and feature differences between Pro and Enterprise plans (tariff_questions). • Agent provided a highly bureaucratic and dismissive response, refusing to provide any information. • Agent failed to address the client's extreme urgency and stress regarding their startup launch. • Agent did not provide even basic public pricing for the Pro plan, forcing an unnecessary wait for a sales callback. • Client ended the interaction feeling unsupported and 'pushed away', with the core issue completely unresolved.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone",
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0071",
+        "analysis": {
+            "reasoning": "- Client accidentally purchased an annual subscription ($1,200) instead of monthly due to UI confusion.\n- Client is in financial distress (overdrafted, unable to pay rent) and requests an immediate refund.\n- Agent repeatedly cites a 'strictly non-refundable' policy for annual plans.\n- Agent offers a 2-month credit and a future downgrade, which does not address the client's immediate liquidity crisis.\n- Agent claims no one, including a supervisor, has the authority to override the policy, despite the transaction still being 'pending'.\n- Client ends the chat in despair, stating they will lose their business.\n- While the agent followed company policy, the failure to escalate a high-stakes financial emergency where a 'void' was still technically possible (pending status) constitutes a 'no_resolution' mistake in a quality context.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0072",
+        "analysis": {
+            "reasoning": "- Client requested physical site locations for EU-West and confirmation of S3-compatible storage support.\n- Agent refused to provide site locations due to security protocols but failed to offer alternative compliance documentation (e.g., SOC2).\n- Agent completely ignored the second technical question regarding S3 compatibility.\n- Client explicitly stated that core requirements were not met and they would seek another provider.\n- Despite the client's formal politeness, the interaction resulted in a total failure to resolve the inquiry and the loss of the client.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0073",
+        "analysis": {
+            "reasoning": "- Client contacted support because a card was declined during a pro listing renewal.\n- Agent provided troubleshooting steps and an alternative payment link.\n- Client successfully paid using the alternative link.\n- Agent manually refreshed the cache to ensure the listing went live immediately.\n- Client confirmed the listing was visible and expressed high satisfaction and relief.\n- No agent mistakes were identified; the interaction was efficient and empathetic.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0074",
+        "analysis": {
+            "reasoning": "- Client reported a critical POS sync failure during peak business hours.\n- Agent used excessive technical jargon (handshake, packets, cloud infrastructure) that confused the client.\n- Agent instructed the client to delete transaction history but failed to provide step-by-step guidance or address the client's concern about data loss.\n- Agent escalated a business-critical 'line-down' situation to a 3-5 day queue, which is inappropriate for an active retail crisis.\n- Client was forced to close their shop due to the lack of immediate support.\n- Satisfaction is marked as unsatisfied despite the polite closing because the core issue was not resolved and the business suffered a loss.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "no_resolution",
+                "unnecessary_escalation"
+            ]
+        }
+    },
+    {
+        "id": "chat_0075",
+        "analysis": {
+            "reasoning": "- Client reported a 403 Forbidden error preventing access to a vault for a time-sensitive filing.\n- Agent correctly identified the root cause as a recent security patch affecting static IP ranges.\n- Agent provided an immediate workaround (VPN) and initiated a backend edge-cache refresh.\n- Client successfully accessed the vault via VPN but expressed frustration regarding the time lost and the latency of the workaround.\n- Satisfaction is marked as unsatisfied because the client explicitly stated the troubleshooting delay put them in a difficult position with their deadline.\n- Agent performance was high quality, providing technical insight and a functional solution without mistakes.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0076",
+        "analysis": {
+            "reasoning": "Client inquired about custom role limits for Team vs Enterprise tiers. Agent provided correct data but was overtly hostile, insulting the client's intelligence and calling the inquiry a waste of time. Client received the information but was clearly offended, stating they would look at other options and ending the chat abruptly.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone"
+            ]
+        }
+    },
+    {
+        "id": "chat_0077",
+        "analysis": {
+            "reasoning": "- Client contacted support regarding a duplicate charge for a single item.\n- Agent refused a refund, citing a lack of a 'refund button' and corporate policy regarding digital assets.\n- Agent offered a 5% discount code as the sole resolution for a $50 double-billing error.\n- Client explained severe financial hardship (rent/food) caused by the error.\n- Agent repeated robotic, scripted explanations about 'digital economy integrity' instead of escalating to a billing specialist or supervisor.\n- Client terminated the chat to pursue a bank chargeback, leaving completely unsatisfied.\n- The failure to resolve or escalate a clear technical billing error constitutes a total lack of resolution.",
+            "intent": "payment_issues",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0078",
+        "analysis": {
+            "reasoning": "• Client wants to delete account and stop an imminent charge. • Client asks about credit card data retention policy. • Agent uses vague, repetitive canned responses that do not provide specific instructions. • Agent ignores the data retention question in both responses. • Client expresses confusion and urgency, but the agent fails to adapt or provide direct assistance. • Client abandons the chat to contact their bank because the agent's instructions were incomprehensible. • Core needs remained unmet despite the client's attempts to clarify.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution",
+                "rude_tone"
+            ]
+        }
+    },
+    {
+        "id": "chat_0079",
+        "analysis": {
+            "reasoning": "- Client reported payment error 4002 during Enterprise upgrade.\n- Agent identified root cause as tax ID validation failure.\n- Agent applied manual override to bypass the block.\n- Client confirmed successful upgrade and expressed high satisfaction.\n- No mistakes identified; resolution was immediate and effective.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0080",
+        "analysis": {
+            "reasoning": "• Client reports a specific 403 error on the analytics export endpoint and provides detailed technical context. • Client explicitly asks the agent to check server logs for the last request. • Agent ignores the specific request to check logs and provides a verbose, scripted response. • Agent escalates the issue with a 3-5 business day resolution window, which fails to meet the client's urgent deadline for a meeting the next morning. • Although the client is polite at the end, the core issue remains unresolved and the client is left blocked on a high-stakes task, meeting the criteria for 'unsatisfied'.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "ignored_question"
+            ]
+        }
+    },
+    {
+        "id": "chat_0081",
+        "analysis": {
+            "reasoning": "- Client reported a technical error (0x8842 sync error) with a hardware security key during MFA handshake.\n- Support agent correctly identified the urgency and provided a valid workaround (Temporary Access Pass) while also offering technical troubleshooting steps.\n- Agent correctly diagnosed the likely cause (cryptographic deprecation) after the client provided advanced technical data (NTP drift/packet capture).\n- The core issue (accessing the DAW license) was resolved within the client's time constraint.\n- Client confirmed the solution worked and the session could proceed.",
+            "intent": "technical_errors",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0082",
+        "analysis": {
+            "reasoning": "- Client asked for specific technical specs: API RPM (integer) and concurrent SSH session limits.\n- Agent responded three times with identical/near-identical marketing boilerplate.\n- Agent repeatedly ignored the specific question about SSH sessions.\n- Agent failed to provide a quantitative value for API rate limits, using vague qualitative terms instead.\n- Client explicitly stated the responses were useless and that they were abandoning the service due to lack of transparency.\n- Agent failed to escalate to a technical resource or provide the requested data despite three attempts.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0083",
+        "analysis": {
+            "reasoning": "- Client contacted regarding a $200 renewal charge after a failed API cancellation attempt. - Agent confirmed a technical discrepancy where the API returned a success code (204) to the client but logged an error (401) internally due to a legacy configuration bug. - Agent refused a refund despite acknowledging the system-side failure, citing a strict non-refundable policy and lack of personal authority. - Agent failed to escalate the billing error to a department with the power to rectify financial errors caused by system failures. - Client ended the chat unsatisfied, stating they would pursue a bank dispute.",
+            "intent": "payment_issues",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0084",
+        "analysis": {
+            "reasoning": "- Client requested account and data deletion.\n- Agent claimed deletion is impossible due to banking regulations and suggested a manual workaround of typing random characters into profile fields.\n- This advice is unprofessional and likely constitutes incorrect information regarding data handling and privacy rights.\n- Client expressed frustration with the complexity of the workaround and left the chat without a resolution.\n- The core need (deletion) was not met, and the agent provided a poor alternative.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "incorrect_info",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0085",
+        "analysis": {
+            "reasoning": "- Client contacted support because a subscription payment was being declined.\n- Agent provided clear, step-by-step instructions for updating payment details.\n- Client encountered a UI discrepancy (menu items nested under 'Profile'); agent quickly corrected the guidance and explained why the layout differed.\n- Agent addressed the client's concern about location-based blocking (Texas vs. Ohio).\n- Client successfully updated the payment method using the agent's revised instructions.\n- Client confirmed the payment was successful and maps were working.\n- Interaction ended with high client satisfaction.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0086",
+        "analysis": {
+            "reasoning": "- Client reported a specific technical bug (503 error on 50-item payloads) and asked about API deprecation dates.\n- Agent was extremely hostile, using condescending and unprofessional language.\n- Agent ignored the question regarding API deprecation twice.\n- Agent dismissed a specific technical edge case as 'coincidence' without investigation.\n- Agent provided misleading information by claiming 503 errors are exclusively for routine maintenance.\n- Client ended the chat politely but without any resolution to their technical issue or their inquiry.",
             "intent": "technical_errors",
             "satisfaction": "unsatisfied",
             "quality_score": 1,
             "agent_mistakes": [
                 "ignored_question",
                 "incorrect_info",
+                "rude_tone",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0087",
+        "analysis": {
+            "reasoning": "• Client unable to access account due to old phone number for 2FA. • Agent provided clear verification options (security questions). • Agent updated the phone number and provided step-by-step login instructions. • Client confirmed successful login and access to files. • Interaction was efficient and empathetic.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0088",
+        "analysis": {
+            "reasoning": "* Client asked two specific questions: if sensor data is unlimited and for a price list including taxes.\n* Agent ignored the question regarding unlimited sensor data in both responses.\n* Agent refused to provide pricing information directly in the chat, repeatedly directing the client to the website despite the client explaining they were in the middle of harvest and found the site difficult to use.\n* Client's core needs remained unmet, leading to an explicit statement of frustration and premature exit from the chat.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0089",
+        "analysis": {
+            "reasoning": "• Client contacted support for a $1,200 refund for an unwanted renewal.\n• Agent identified the account as Enterprise tier and cited a signed agreement and a 24-hour policy window as reasons for denial.\n• Client repeatedly stated they never signed such an agreement and were previously on a trial/basic plan.\n• Client expressed extreme distress (negative bank balance, unable to pay developer, business at risk).\n• Agent refused to escalate to a manager despite multiple direct requests, claiming 'final authority' as a senior specialist.\n• Agent repeatedly offered irrelevant documents (invoice/downgrade guide) while the client was in a financial crisis.\n• Client ended the chat in a state of extreme dissatisfaction, threatening a bank dispute and legal action.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 2,
+            "agent_mistakes": [
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0090",
+        "analysis": {
+            "reasoning": "- Client requested immediate data download for a legal meeting and asked two specific questions: the location of the download button and if 2023 messages are included.\n- Agent used overly formal, robotic language and failed to answer either specific question in both responses.\n- Agent insisted on a 3-5 day escalation process despite the client's clear deadline for the following morning.\n- Agent ignored the 'how-to' aspect of the query (button location) which does not require a privacy specialist to answer.\n- Client ended the chat explicitly stating the interaction was not helpful and their needs were not met.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0091",
+        "analysis": {
+            "reasoning": "- Client contacted support regarding payment failures and potential overcharging due to a technical glitch (blinking screen).\n- Intent is classified as payment_issues as the core problem was a transaction failure and fear of duplicate billing.\n- Agent provided immediate reassurance, verified the billing ledger, and confirmed no funds were taken for the failed attempts.\n- Agent provided a technical workaround (switching devices) which successfully resolved the issue before a deadline.\n- Agent confirmed the final successful transaction and re-verified that no duplicates occurred.\n- Client expressed high satisfaction and relief at the end of the interaction.\n- No agent mistakes were identified; the agent was proactive, empathetic, and thorough.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0092",
+        "analysis": {
+            "reasoning": "- Client reported a memory leak in build 4.2, requested GC API documentation, and asked about the closure of ticket #8821.\n- Agent provided incorrect information by denying the existence of the GC API mentioned in the release notes.\n- Agent repeatedly ignored the client's specific question regarding the closed bug report #8821.\n- Agent offered irrelevant troubleshooting (texture optimization) for a core engine memory leak occurring in empty scenes.\n- Client terminated the interaction due to the agent's failure to address technical facts and specific inquiries.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "incorrect_info",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0093",
+        "analysis": {
+            "reasoning": "* Client reported account lockout due to too many attempts.\n* Agent identified the security protocol trigger and manually cleared the lockout flag.\n* Agent proactively sent a bypass code to circumvent a known mail server lag.\n* Client confirmed successful login and data visibility.\n* Issue was resolved efficiently with clear communication.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0094",
+        "analysis": {
+            "reasoning": "• Client inquired about concurrent stream limits for the Pro-Am plan. • Agent provided the correct information (one stream) but used extremely hostile, insulting, and unprofessional language. • Agent explicitly insulted the client's intelligence and called the inquiry a waste of time. • Client responded with sarcasm and stated they would switch to a different provider due to the poor service. • Despite the client's formal politeness at the end, the interaction resulted in customer churn and a highly negative experience.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone"
+            ]
+        }
+    },
+    {
+        "id": "chat_0095",
+        "analysis": {
+            "reasoning": "- Client contacted to request a refund for a $499 renewal charge, citing dark patterns in the cancellation flow.\n- Agent offered a full refund as a goodwill gesture despite a non-refundable policy.\n- Agent explained that the refund requires 3-5 business days for the payment to settle before processing.\n- Client, claiming expertise in UX and Stripe's API, disputed the technical necessity of the delay and accused the company of unethical practices.\n- Client terminated the interaction prematurely to file a bank dispute and publish a negative review.\n- Agent followed protocol and remained professional; no specific mistakes were made according to definitions.",
+            "intent": "refunds",
+            "satisfaction": "unsatisfied",
+            "quality_score": 4,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0096",
+        "analysis": {
+            "reasoning": "- Client contacted support to locate the 'Export' button.\n- Agent provided the correct location (File menu) but used extremely condescending and unprofessional language.\n- Agent insulted the client's competence and blamed them for wasting time.\n- Client expressed deep dissatisfaction with the tone and stated they would stop using the service.\n- Although the technical answer was provided, the agent's behavior led to customer churn.",
+            "intent": "other",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "rude_tone"
+            ]
+        }
+    },
+    {
+        "id": "chat_0097",
+        "analysis": {
+            "reasoning": "- Client reported card decline during urgent upload.\n- Agent identified 'Postal Code Mismatch' error and provided specific billing link.\n- Agent explained the cause and provided clear instructions to resolve.\n- Client followed instructions and payment was successful.\n- Agent confirmed account status on the backend to reassure the client.\n- Client confirmed the issue was resolved and expressed gratitude.",
+            "intent": "payment_issues",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0098",
+        "analysis": {
+            "reasoning": "- Client reported a functional failure with the upload button (technical_error).\n- Agent suggested clearing cache/cookies but ignored the client's direct questions on how to perform these steps.\n- Agent failed to provide any alternative workarounds (e.g., incognito mode, different browser) for a high-stakes, time-sensitive issue.\n- Agent concluded the interaction by stating nothing else could be done, leading to no resolution.\n- Although the client was formally polite at the end, the core issue remained unresolved and the client's situation is critical, triggering the 'hidden dissatisfaction' rule.",
+            "intent": "technical_errors",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "no_resolution"
+            ]
+        }
+    },
+    {
+        "id": "chat_0099",
+        "analysis": {
+            "reasoning": "- Client reported login failure due to CAPTCHA visibility issues (account_access). - Agent provided standard troubleshooting steps including refresh, audio challenge, and connection reset. - Client reported persistent issues with UI size and a connection error. - Agent proactively sent a 'Magic Link' to bypass the authentication process entirely. - Client successfully retrieved the required pickup number. - Core objective was achieved; agent demonstrated empathy and effective problem-solving despite the client's external frustration regarding the warehouse queue.",
+            "intent": "account_access",
+            "satisfaction": "satisfied",
+            "quality_score": 5,
+            "agent_mistakes": []
+        }
+    },
+    {
+        "id": "chat_0100",
+        "analysis": {
+            "reasoning": "- Client requested technical specifications (concurrency limits, rate-limiting) for the Professional pricing tier.\n- Support agent responded with extreme hostility, calling the client's request 'exhausting' and 'a waste of time'.\n- Agent failed to answer any of the technical questions or provide a professional path to resolution.\n- Client expressed clear dissatisfaction with the documentation and the agent's unprofessionalism, concluding they would not upgrade.\n- Interaction resulted in a lost business opportunity due to agent behavior.",
+            "intent": "tariff_questions",
+            "satisfaction": "unsatisfied",
+            "quality_score": 1,
+            "agent_mistakes": [
+                "ignored_question",
+                "rude_tone",
                 "no_resolution"
             ]
         }

@@ -1,9 +1,7 @@
 import json
-import os
-import time
 from dotenv import load_dotenv
 
-# Правильні імпорти для нового SDK
+# Correct imports for the new SDK
 from google import genai
 from google.genai import types
 
@@ -11,9 +9,9 @@ import config
 import models
 import prompts
 
-# Завантажуємо змінні середовища
+# Load environment variables
 load_dotenv()
-# Клієнт автоматично підхопить ключ GEMINI_API_KEY з файлу .env
+# Client will automatically pick up GEMINI_API_KEY from .env
 client = genai.Client()
 
 
@@ -27,7 +25,7 @@ def format_transcript(dialogue_list: list) -> str:
 
 
 def analyze_chat(transcript_text: str) -> dict:
-    """Відправляє транскрипт до LLM через новий SDK."""
+    """Sends the transcript to the LLM using the new SDK."""
 
     response = client.models.generate_content(
         model=config.ANALYSIS_MODEL,
@@ -47,7 +45,7 @@ def analyze_chat(transcript_text: str) -> dict:
 if __name__ == "__main__":
     print("Starting analysis phase...")
 
-    # Читаємо згенерований датасет
+    # Read the generated dataset
     try:
         with open("dataset.json", "r", encoding="utf-8") as f:
             dataset = json.load(f)
@@ -63,10 +61,10 @@ if __name__ == "__main__":
         transcript_text = format_transcript(chat["dialogue"])
 
         try:
-            # Отримуємо аналіз від моделі
+            # Get analysis from the model
             analysis_data = analyze_chat(transcript_text)
 
-            # Збираємо фінальний об'єкт
+            # Assemble the final object
             result_record = {
                 "id": chat["id"],
                 "analysis": analysis_data
@@ -79,7 +77,7 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"  -> Error analyzing {chat['id']}: {e}")
 
-            # Зберігаємо результати аналізу
+            # Save analysis results
     with open("analysis_results.json", "w", encoding="utf-8") as f:
         json.dump(analysis_results, f, indent=4, ensure_ascii=False)
 

@@ -12,20 +12,33 @@ load_dotenv()
 client = genai.Client()
 
 
-def generate_random_config() -> dict:
-    """Selects parameters for the chat scenario using logical dependencies to avoid conflicts."""
+def generate_balanced_config(index: int) -> dict:
+    """Selects parameters using a round-robin approach with a 50% focus on agent mistakes."""
 
-    # 1. Вибираємо базовий сценарій (Він диктує рівень задоволеності, помилки та початковий тон)
-    scenario = random.choice(list(config.CaseScenario)).value
+    # 1. Intents cycle through in round-robin
+    all_intents = [i.value for i in config.Intent]
+    intent = all_intents[index % len(all_intents)]
+
+    # 2. BALANCED SCENARIO SELECTION (50% of dialogues will contain mistakes)
+    # Alternate normal scenarios with agent-mistake scenarios
+    scenario_cycle = [
+        config.CaseScenario.SUCCESSFUL.value,
+        "AGENT_MISTAKE",  # Mistake!
+        config.CaseScenario.PROBLEMATIC.value,
+        "AGENT_MISTAKE",  # Mistake!
+        config.CaseScenario.CONFLICT.value,
+        "AGENT_MISTAKE"  # Mistake!
+    ]
+    scenario = scenario_cycle[index % len(scenario_cycle)]
     mistakes = []
 
     if scenario == config.CaseScenario.SUCCESSFUL.value:
         satisfaction = config.Satisfaction.SATISFIED.value
-        tone_choices = ["polite", "confused", "rushed"]  # Конфліктних емоцій на старті немає
+        tone_choices = ["polite", "confused", "rushed"]
 
     elif scenario == config.CaseScenario.PROBLEMATIC.value:
-        satisfaction = random.choice([config.Satisfaction.NEUTRAL.value, config.Satisfaction.UNSATISFIED.value])
-        tone_choices = ["polite", "anxious/panicked", "frustrated", "confused"]
+        satisfaction = config.Satisfaction.NEUTRAL.value
+        tone_choices = ["polite", "confused"]
 
     elif scenario == config.CaseScenario.CONFLICT.value:
         satisfaction = config.Satisfaction.UNSATISFIED.value
@@ -33,14 +46,24 @@ def generate_random_config() -> dict:
 
     else:  # AGENT_MISTAKE
         satisfaction = config.Satisfaction.UNSATISFIED.value
-        tone_choices = config.CLIENT_TONES  # Клієнт може починати будь-як, проблему створить агент
-        num_mistakes = random.randint(1, 2)
-        mistakes = [m.value for m in random.sample(list(config.AgentMistake), k=num_mistakes)]
+        tone_choices = config.CLIENT_TONES
+
+        # 3. EVEN DISTRIBUTION OF MISTAKES
+        all_mistakes = [m.value for m in config.AgentMistake]
+
+        # Use integer division (index // 2) because mistakes occur every other slot.
+        # This ensures we cycle through all 5 mistakes smoothly without duplicates.
+        mistake_index = (index // 2) % len(all_mistakes)
+        primary_mistake = all_mistakes[mistake_index]
+        mistakes = [primary_mistake]
+
+        # 40% chance to add a second mistake (to make analysis more interesting)
+        if random.random() < 0.50:
+            available_second = [m for m in all_mistakes if m != primary_mistake]
+            second_mistake = random.choice(available_second)
+            mistakes.append(second_mistake)
 
     tone = random.choice(tone_choices)
-
-    # 2. Вибираємо намір (Він диктує терміновість)
-    intent = random.choice(list(config.Intent)).value
 
     if intent == config.Intent.ACCOUNT_ACCESS.value:
         urgency = random.choice(["high (blocking work/life)", "critical (losing money/time)"])
@@ -49,9 +72,7 @@ def generate_random_config() -> dict:
     else:
         urgency = random.choice(config.URGENCY_LEVELS)
 
-    # 3. Вибираємо професію (Вона диктує технічну грамотність)
     profession = random.choice(config.CLIENT_PROFESSIONS)
-
     tech_roles = ["software engineer", "data scientist", "QA tester", "system administrator", "UX/UI designer",
                   "crypto trader"]
     manual_roles = ["construction worker", "mechanic", "farmer", "truck driver", "chef", "plumber", "retired"]
@@ -63,7 +84,6 @@ def generate_random_config() -> dict:
     else:
         tech_savviness = random.choice(config.TECH_SAVVINESS)
 
-    # 4. Вік вибираємо випадково (він не створює жорстких логічних конфліктів)
     age = random.choice(config.CLIENT_AGES)
 
     return {
@@ -80,7 +100,7 @@ def generate_random_config() -> dict:
 
 
 def get_orchestrator_instructions(chat_config: dict) -> dict:
-    """Отримує системні промпти від Оркестратора використовуючи новий SDK."""
+    """Retrieve system prompts from the Orchestrator using the new SDK."""
     mistakes_str = ", ".join(chat_config["agent_mistakes"]) if chat_config["agent_mistakes"] else "None"
 
     user_prompt = prompts.ORCHESTRATOR_USER_TEMPLATE.format(
@@ -111,7 +131,7 @@ def get_orchestrator_instructions(chat_config: dict) -> dict:
 
 
 def simulate_chat(instructions: dict) -> list:
-    """Запускає цикл спілкування з підтримкою розділення на окремі повідомлення ([ENTER])."""
+    """Runs the chat loop producing separated message bubbles ([ENTER])."""
 
     client_chat = client.chats.create(
         model=config.GENERATION_MODEL,
@@ -131,40 +151,40 @@ def simulate_chat(instructions: dict) -> list:
 
     transcript = []
 
-    # 1. Перше повідомлення Клієнта (Оркестратор теж може згенерувати його з [ENTER])
+    # 1. First Client message (Orchestrator may also generate it with [ENTER])
     current_input = instructions["first_message_hint"]
 
-    # Розбиваємо перше повідомлення
+    # Split the first message into bubbles
     for msg in current_input.split("[ENTER]"):
         clean_msg = msg.strip()
         if clean_msg:
             transcript.append({"role": "client", "text": clean_msg})
 
     for turn in range(config.MAX_CHAT_TURNS):
-        # 2. Відповідь Сапорта
+        # 2. Support response
         support_response = support_chat.send_message(current_input)
 
-        # Розбиваємо відповідь сапорта на окремі бабли
+        # Split support response into separate bubbles
         support_messages = support_response.text.split("[ENTER]")
         for msg in support_messages:
             clean_msg = msg.strip()
             if clean_msg:
                 transcript.append({"role": "support", "text": clean_msg})
 
-        # Передаємо клієнту оригінальний текст з [ENTER], щоб він розумів контекст "паузи"
+        # Pass original text with [ENTER] back to the client so it understands "pause" context
         current_input = support_response.text
 
-        # 3. Відповідь Клієнта
+        # 3. Client response
         client_response = client_chat.send_message(current_input)
         client_text = client_response.text
 
         is_end = False
         if "[END_CHAT]" in client_text:
             is_end = True
-            # Вирізаємо маркер завершення перед розбиттям
+            # Remove the end marker before splitting
             client_text = client_text.replace("[END_CHAT]", "").strip()
 
-        # Розбиваємо відповідь клієнта на окремі бабли
+        # Split client response into separate bubbles
         client_messages = client_text.split("[ENTER]")
         for msg in client_messages:
             clean_msg = msg.strip()
@@ -187,10 +207,8 @@ if __name__ == "__main__":
         print(f"[{i + 1}/{config.DATASET_SIZE}] Generating chat...")
 
         try:
-            # 1. Define conditions
-            chat_config = generate_random_config()
-            print(f"  -> Config: {chat_config['intent']} | {chat_config['scenario']} | {chat_config['satisfaction']}")
-
+            chat_config = generate_balanced_config(i)
+            print(f"  -> Config: {chat_config['intent']} | {chat_config['scenario']} | {chat_config['satisfaction']} | Mistakes: {chat_config['agent_mistakes']}")
             # 2. Get roles from Orchestrator
             instructions = get_orchestrator_instructions(chat_config)
 
