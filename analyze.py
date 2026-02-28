@@ -25,23 +25,54 @@ def format_transcript(dialogue_list: list) -> str:
         transcript += f"{role}: {text}\n"
     return transcript
 
-
-def analyze_chat(transcript_text: str) -> dict:
-    """Відправляє транскрипт до LLM через новий SDK."""
-
+def _call_llm(prompt: str, response_schema):
+    """Допоміжна функція для одного запиту до LLM."""
     response = client.models.generate_content(
         model=config.ANALYSIS_MODEL,
-        contents=f"Analyze the following chat:\n\n{transcript_text}",
+        contents=prompt,
         config=types.GenerateContentConfig(
-            system_instruction=prompts.ANALYZER_SYSTEM_PROMPT,
             temperature=config.ANALYSIS_TEMP,
             response_mime_type="application/json",
-            response_schema=models.AnalysisOutput,
+            response_schema=response_schema,
             thinking_config={"thinking_level": config.THINKING_LEVEL}
         )
     )
-
     return json.loads(response.text)
+
+def analyze_chat(transcript_text: str) -> dict:
+    """Аналізує чат покроково, викликаючи модель для кожного аспекту окремо."""
+
+    context = prompts.BASE_CONTEXT.format(transcript_text=transcript_text)
+
+    intent_res = _call_llm(context + prompts.INTENT_PROMPT, models.IntentOutput)
+
+    sat_res = _call_llm(context + prompts.SATISFACTION_PROMPT, models.SatisfactionOutput)
+
+    mistakes_res = _call_llm(context + prompts.MISTAKES_PROMPT, models.MistakesOutput)
+
+    score_context = (
+        f"{context}\n"
+        f"Intent found: {intent_res.get('intent')}\n"
+        f"Satisfaction found: {sat_res.get('satisfaction')}\n"
+        f"Agent mistakes found: {mistakes_res.get('mistakes')}\n"
+    )
+    score_res = _call_llm(score_context + prompts.SCORE_PROMPT, models.ScoreOutput)
+
+    # Фінальний результат
+    final_analysis = {
+        "intent": intent_res.get("intent"),
+        "satisfaction": sat_res.get("satisfaction"),
+        "agent_mistakes": mistakes_res.get("mistakes", []),
+        "quality_score": score_res.get("score"),
+        "reasoning": {
+            "intent": intent_res.get("reasoning"),
+            "satisfaction": sat_res.get("reasoning"),
+            "mistakes": mistakes_res.get("reasoning"),
+            "score": score_res.get("reasoning")
+        }
+    }
+    
+    return final_analysis
 
 
 if __name__ == "__main__":

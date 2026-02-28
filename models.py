@@ -47,3 +47,19 @@ class AnalysisOutput(BaseModel):
         ...,
         description="List of specific mistakes made by the agent. Choose from: ignored_question, incorrect_info, rude_tone, no_resolution, unnecessary_escalation. Empty list if no mistakes."
     )
+
+class IntentOutput(BaseModel):
+    reasoning: str = Field(..., description="Step-by-step logic for intent classification.")
+    intent: str = Field(..., description="Main intent category.")
+
+class SatisfactionOutput(BaseModel):
+    reasoning: str = Field(..., description="Logic for evaluating satisfaction.")
+    satisfaction: str = Field(..., description="Final satisfaction state (satisfied, neutral, unsatisfied).")
+
+class MistakesOutput(BaseModel):
+    reasoning: str = Field(..., description="Analysis of agent's messages.")
+    mistakes: list[str] = Field(..., description="List of specific mistakes.")
+
+class ScoreOutput(BaseModel):
+    reasoning: str = Field(..., description="Final justification.")
+    score: int = Field(..., description="Quality score from 1 to 5.")

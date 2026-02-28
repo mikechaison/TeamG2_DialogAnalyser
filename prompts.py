@@ -63,11 +63,9 @@ Please generate the setup for the following configuration:
 Generate the JSON output now. Ensure the Support Agent prompt has NO knowledge of the Client Persona.
 """
 
-ANALYZER_SYSTEM_PROMPT = """You are an expert QA Quality Assurance Auditor for a customer support team.
-Your task is to analyze a chat transcript between a 'client' and a 'support' agent and evaluate the interaction strictly according to the provided JSON schema.
+BASE_CONTEXT = "You are an expert QA Auditor. Analyze the following chat transcript between a 'client' and a 'support' agent:\n\n{transcript_text}\n\n"
 
---- DEFINITIONS OF CLASSIFICATION PARAMETERS ---
-
+INTENT_PROMPT = """Task: Classify the primary INTENT.
 INTENT CATEGORIES (You MUST choose one of these exact strings):
 - payment_issues: Issues related to financial transactions, billing processing, or payment method failures.
 - technical_errors: Systemic malfunctions, software bugs, or functional failures disrupting the intended use of a service/product.
@@ -75,18 +73,43 @@ INTENT CATEGORIES (You MUST choose one of these exact strings):
 - tariff_questions: Inquiries regarding pricing structures, subscription models, billing cycles, or service limitations.
 - refunds: Requests for the reversal of a previously processed financial transaction.
 - other: General inquiries that do not strictly fall into the specific categories above.
+Return JSON: {"intent": "string"}"""
 
-SATISFACTION LEVELS (You MUST choose one of these exact strings):
-- satisfied: The core need was fulfilled, and the interaction concluded with the user's primary objective completely achieved.
-- neutral: The interaction was purely transactional or ended in an acceptable compromise without strong positive or negative sentiment.
-- unsatisfied: The core need remained unmet, the issue persisted, or the service quality was unacceptable to the user.
+SATISFACTION_PROMPT = """Task: Evaluate SATISFACTION level based on the FINAL outcome AND the user's emotional state.
+CATEGORIES:
+- satisfied: Core need was met AND the user expressed clear gratitude or ended without complaints about the process.
+- neutral: The issue was resolved but the user was annoyed, or the interaction was purely robotic/transactional.
+- unsatisfied: The issue persists OR the user expressed significant frustration ("waste of time", "total nightmare", "unprofessional") regardless of the technical resolution.
+Return JSON: {"satisfaction": "string"}"""
 
+MISTAKES_PROMPT = """Task: Identify AGENT MISTAKES.
 AGENT MISTAKES (You MUST choose from these exact strings, or return an empty list if none apply):
-- ignored_question: Overlooking or bypassing a direct inquiry to focus on unrelated points, predefined scripts, or different topics.
-- incorrect_info: Providing guidance, rules, or facts that are fundamentally flawed, contradictory, or misleading within the context.
+- ignored_question: Specifically look for when a user asks "Can I do X?" and the agent replies with a script about "Y".
+- incorrect_info: Check if the agent's advice contradicts common sense or the user's technical proof (e.g., telling a user to clear cache for a 503 server error).
+- unnecessary_escalation: Transferring to 'Tier 2', 'Engineering', or 'Billing' when the user's request could be handled by a manual override, or when the agent uses "it's a backend issue" as an excuse to not help.
 - rude_tone: Communicating in a dismissive, passive-aggressive, condescending, overly blunt, or unprofessional manner.
 - no_resolution: Concluding the interaction without providing a functional solution, viable workaround, or clear actionable next steps for the core issue.
-- unnecessary_escalation: Transferring the issue to another department or communication channel when the current agent possessed the capability and tools to resolve it directly.
+Return JSON: {"mistakes": ["string", "string"]}"""
+
+SCORE_PROMPT = """Task: Provide a QUALITY SCORE (1-5).
+Provide an objective evaluation of the overall quality of the support interaction. Assign a final score from 1 to 5 based on the following weighted criteria:
+Issue Resolution: Did the agent address the core problem or answer the primary question?
+Technical Accuracy: Were there any factual, procedural, or technical errors in the response?
+Communication Style: Was the tone appropriate, empathetic, and professional?
+Efficiency & Clarity: Was the response concise and easy to follow, or was it cluttered with unnecessary information?
+
+Scoring Rubric:
+5 (Excellent): The core issue was resolved perfectly. The agent demonstrated high empathy, provided proactive solutions, and made zero mistakes. The user requires no further assistance.
+4 (Good): The issue was resolved, and the response was accurate. There may have been minor flaws, such as a slightly robotic tone or small formatting issues, but they did not impact the user experience.
+3 (Fair): The agent provided a correct but "bare minimum" response. The tone was neutral/formal, or the instructions were slightly confusing, requiring the user to ask for minor clarifications.
+2 (Poor): Significant mistakes were identified. The agent failed to address part of the user's concern, provided a generic/templated response that didn't fit the context, or showed a lack of empathy.
+1 (Critical Failure): The core issue was not resolved. The agent provided misinformation, was unprofessional/rude, or the response was completely irrelevant to the user's prompt.
+Return JSON: {"score": integer}"""
+
+ANALYZER_SYSTEM_PROMPT = """You are an expert QA Quality Assurance Auditor for a customer support team.
+Your task is to analyze a chat transcript between a 'client' and a 'support' agent and evaluate the interaction strictly according to the provided JSON schema.
+
+--- DEFINITIONS OF CLASSIFICATION PARAMETERS ---
 
 --- Chain-Of-Thought ---
 
